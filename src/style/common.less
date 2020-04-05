@@ -1,0 +1,31 @@
+// 表格样式重写
+.el-table {
+  .el-table__header {
+    thead {
+      tr {
+        th {
+          color: rgba(0,0,0,0.85);
+          font-weight: bold;
+          background-color: #F0F3F5;
+          padding: 6px 0;
+        }
+      }
+    }
+  }
+  tbody {
+    td {
+      padding: 7px 0;
+    }
+  }
+}
+
+// 全局修改输入框高度
+.el-input__inner {
+  height: 32px;
+  line-height: 32px;
+  .el-date-editor {
+    .el-range__icon {
+      line-height: 24px;
+    }
+  }
+}
