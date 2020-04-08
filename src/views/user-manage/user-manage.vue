@@ -10,7 +10,7 @@
         >
           <i 
             class="el-icon-search search-icon" 
-            slot="suffix" 
+            slot="suffix"
             @click="searchUser"
           ></i>
         </el-input>
@@ -40,43 +40,43 @@
                 class="demo-table-expand"
               >
                 <el-form-item 
-                  label="姓名"
+                  label="姓名:"
                   prop="user_cname"
                 >
                   <span>{{ props.row.user_cname }}</span>
                 </el-form-item>
                 <el-form-item 
-                  label="账号"
+                  label="账号:"
                   prop="user_name"
                 >
                   <span>{{ props.row.user_name }}</span>
                 </el-form-item>
                 <el-form-item 
-                  label="密码"
+                  label="密码:"
                   prop="user_password"
                 >
                   <span>{{ props.row.user_password }}</span>
                 </el-form-item>
                 <el-form-item 
-                  label="部门"
+                  label="部门:"
                   prop="user_department"
                 >
                   <span>{{ props.row.user_department }}</span>
                 </el-form-item>
                 <el-form-item 
-                  label="职位"
+                  label="职位:"
                   prop="user_role"
                 >
                   <span>{{ props.row.user_role }}</span>
                 </el-form-item>
                 <el-form-item 
-                  label="创建时间"
+                  label="创建时间:"
                   prop="create_time"
                 >
                   <span>{{ props.row.create_time }}</span>
                 </el-form-item>
                 <el-form-item 
-                  label="更新时间"
+                  label="更新时间:"
                   prop="update_time"
                 >
                   <span>{{ props.row.update_time }}</span>
@@ -87,17 +87,18 @@
           <el-table-column 
             prop="user_cname" 
             label="姓名"
-          ></el-table-column>
+          >
+          </el-table-column>
           <el-table-column 
             prop="user_name" 
             label="账号"
             align="left"
             sortable="custom"
-          ></el-table-column>
-          <!-- <el-table-column 
-            prop="user_password" 
-            label="密码"
-          >{{'******'}}</el-table-column> -->
+          >
+            <template slot-scope="scope">
+              <span v-html="scope.row.user_name"></span>
+            </template>
+          </el-table-column>
           <el-table-column
             prop="user_department"
             label="部门"
@@ -287,12 +288,24 @@ export default {
         let { code, message } = result;
         if (code === 200) {
           this.tableData = message;
+          this.handleHeighLight(this.tableData);
         }
         this.loading = false;
       } catch (err) {
         console.log(err);
       }
     },
+    /**
+     处理高亮
+     */
+     handleHeighLight(data) {
+       data.forEach(item => {
+         item.user_name = item.user_name.replace(new RegExp(this.searchInput, "gm"),
+                          "<span style='color:red;font-weight:bold'>" 
+                          + this.searchInput
+                          + "</span>");
+       })
+     },
     handleSizeChange(val) {
       this.pageSize = val;
       this.getUserInfo();
