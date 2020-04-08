@@ -28,19 +28,62 @@
       </div>
       <div class="user-container-table">
         <el-table
-          stripe
-          border
           :data="tableData"
           :loading="loading"
           style="width: 100%"
           @sort-change="changeTableSort"
-          @selection-change="handleSelect"
         >
-          <el-table-column 
-            type="selection" 
-            align="center" 
-            width="55"
-          ></el-table-column>
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <el-form 
+                label-position="left"
+                class="demo-table-expand"
+              >
+                <el-form-item 
+                  label="姓名"
+                  prop="user_cname"
+                >
+                  <span>{{ props.row.user_cname }}</span>
+                </el-form-item>
+                <el-form-item 
+                  label="账号"
+                  prop="user_name"
+                >
+                  <span>{{ props.row.user_name }}</span>
+                </el-form-item>
+                <el-form-item 
+                  label="密码"
+                  prop="user_password"
+                >
+                  <span>{{ props.row.user_password }}</span>
+                </el-form-item>
+                <el-form-item 
+                  label="部门"
+                  prop="user_department"
+                >
+                  <span>{{ props.row.user_department }}</span>
+                </el-form-item>
+                <el-form-item 
+                  label="职位"
+                  prop="user_role"
+                >
+                  <span>{{ props.row.user_role }}</span>
+                </el-form-item>
+                <el-form-item 
+                  label="创建时间"
+                  prop="create_time"
+                >
+                  <span>{{ props.row.create_time }}</span>
+                </el-form-item>
+                <el-form-item 
+                  label="更新时间"
+                  prop="update_time"
+                >
+                  <span>{{ props.row.update_time }}</span>
+                </el-form-item>
+              </el-form>
+            </template>
+          </el-table-column>
           <el-table-column 
             prop="user_cname" 
             label="姓名"
@@ -48,6 +91,7 @@
           <el-table-column 
             prop="user_name" 
             label="账号"
+            align="left"
             sortable="custom"
           ></el-table-column>
           <!-- <el-table-column 
@@ -57,38 +101,43 @@
           <el-table-column
             prop="user_department"
             label="部门"
+            align="left"
           >
           </el-table-column>
           <el-table-column 
             prop="user_role" 
             label="职位"
+            align="left"
             width="180"
           ></el-table-column>
           <el-table-column 
             sortable="custom" 
             prop="article_count" 
-            label="博客总数" 
-            width="120"
+            label="博客总数"
+            align="left"
+            width="140"
           ></el-table-column>
           <el-table-column 
             sortable 
             prop="create_time" 
-            label="创建时间" 
+            label="创建时间"
+            align="left"
             width="200"
           ></el-table-column>
           <el-table-column 
             sortable 
             prop="update_time" 
-            label="更新时间" 
+            label="更新时间"
+            align="left"
             width="200"
           ></el-table-column>
           <el-table-column 
             fixed="right" 
             label="操作" 
-            width="180"
+            width="120"
           >
             <template slot-scope="scope">
-              <el-tooltip 
+              <!-- <el-tooltip 
                 class="item" 
                 effect="dark" 
                 content="查看详情" 
@@ -100,7 +149,7 @@
                   icon="el-icon-view" 
                   circle
                 ></el-button>
-              </el-tooltip>
+              </el-tooltip> -->
               <el-tooltip 
                 class="item" 
                 effect="dark" 
@@ -240,8 +289,8 @@ export default {
           this.tableData = message;
         }
         this.loading = false;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
     handleSizeChange(val) {
@@ -315,9 +364,6 @@ export default {
       this.sortOrder = val.order === "ascending" ? "ASC" : "DESC";
       this.sortField = val.prop;
     },
-    handleSelect(data) {
-      console.log(data);
-    },
     getUserList() {
       this.editVisible = false;
       this.getUserInfo();
@@ -339,6 +385,14 @@ export default {
         margin: 10px;
         cursor: pointer;
       }
+    }
+  }
+  .user-container-table {
+    .el-form-item__label {
+      line-height: 24px;
+    }
+    .el-form-item__content {
+      line-height: 24px;
     }
   }
   .user-container-footer {
