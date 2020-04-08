@@ -74,6 +74,7 @@
 
 <script>
 import API from "../api";
+import moment from 'moment';
 
 export default {
   name: "user-edit",
@@ -117,8 +118,17 @@ export default {
       this.$emit("getUserList");
     },
     async addUser(data) {
+      let params = {
+        user_cname: data.user_cname,
+        user_name: data.user_name,
+        user_password: data.user_password,
+        user_department: data.user_department,
+        user_role: data.user_role,
+        create_time: this.formatTime(new Date()),
+        update_time: ''
+      }
       try {
-        let result = await API.addUser(data);
+        let result = await API.addUser(params);
         let { code } = result;
         if (200 === code) {
           this.$notify.success({
@@ -132,8 +142,18 @@ export default {
       }
     },
     async updateUser(data) {
+      let params = {
+        id: data.id,
+        user_cname: data.user_cname,
+        user_name: data.user_name,
+        user_password: data.user_password,
+        user_department: data.user_department,
+        user_role: data.user_role,
+        create_time: data.create_time,
+        update_time: this.formatTime(new Date())
+      }
       try {
-        let result = await API.updateUser(data);
+        let result = await API.updateUser(params);
         let { code } = result;
         if (200 === code) {
           this.$notify.success({
@@ -145,6 +165,12 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    /**
+     * 格式化时间
+     */
+    formatTime(time) {
+      return moment(time).format('YYYY-MM-DD HH:mm:ss');
     }
   }
 };

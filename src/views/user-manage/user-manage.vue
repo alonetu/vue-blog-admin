@@ -256,7 +256,9 @@ export default {
     async getUserInfo() {
       let params = {
         pageNo: this.currentPage,
-        pageSize: this.pageSize
+        pageSize: this.pageSize,
+        sortField: this.sortField,
+        sort: this.sortOrder
       }
       try {
         this.loading = true;
@@ -273,6 +275,7 @@ export default {
     },
     searchUser() {
       this.loading = true;
+      this.currentPage = 1;
       if (!this.searchInput) {
         this.getUserInfo();
       } else {
@@ -285,9 +288,10 @@ export default {
           user_name: this.searchInput
         };
         let result = await API.getUserByUserName(params);
-        let { code, message } = result;
+        let { code, message, pageTotal } = result;
         if (code === 200) {
           this.tableData = message;
+          this.pageTotal = pageTotal;
           this.handleHeighLight(this.tableData);
         }
         this.loading = false;
@@ -376,6 +380,8 @@ export default {
     changeTableSort(val) {
       this.sortOrder = val.order === "ascending" ? "ASC" : "DESC";
       this.sortField = val.prop;
+      this.currentPage = 1; 
+      this.getUserInfo();
     },
     getUserList() {
       this.editVisible = false;
