@@ -184,8 +184,8 @@ export default {
     return {
       tableData,
       currentPage: 1,
-      pageTotal: 50,
-      pageSize: 20,
+      pageTotal: 10,
+      pageSize: 10,
       searchInput: "",
       detailVisible: false,
       editVisible: false,
@@ -204,16 +204,21 @@ export default {
   },
   methods: {
     async getUserInfo() {
+      let params = {
+        pageNo: this.currentPage,
+        pageSize: this.pageSize
+      }
       try {
         this.loading = true;
-        let result = await API.getUserInfo();
-        let { code, message } = result;
+        let result = await API.getUserList(params);
+        let { code, message, pageTotal } = result;
         if (code === 200) {
           this.tableData = message;
+          this.pageTotal = pageTotal;
         }
         this.loading = false;
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     },
     searchUser() {
@@ -239,8 +244,14 @@ export default {
         console.log(e);
       }
     },
-    handleSizeChange() {},
-    handleCurrentChange() {},
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.getUserInfo();
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      this.getUserInfo();
+    },
     filterTag(value, row) {
       return row.user_department === value;
     },

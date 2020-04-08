@@ -8,18 +8,27 @@ export default {
   async getUserInfo() {
     return await Server.axios('GET', baseURL, `/getusers`)
   },
+
+  // 分页获取用户列表
+  async getUserList(params) {
+    return await Server.axios('GET', baseURL, `/getuserlist?pageNo=${params.pageNo}&pageSize=${params.pageSize}`)
+  },
+
   // 根据用户名获取用户信息
   async getUserByUserName(params) {
     return await Server.axios('GET', baseURL, `/getuserbyusername?user_name=${params.user_name}`)
   },
+
   // 根据id获取用户
   async getUserById(params) {
     return await Server.axios('GET', baseURL, `/getuserbyid?id=${params.id}`)
   },
+
   // 根据id删除用户
   async deleteUserById(params) {
     return await Server.axios('GET', baseURL, `/deleteuserbyid?id=${params.id}`)
   },
+
   // 添加用户
   async addUser(data) {
     return await Server.axios('POST', baseURL, `/adduser`,
@@ -28,6 +37,7 @@ export default {
       'Content-Type': 'application/x-www-form-urlencoded'
     })
   },
+
   // 更新用户信息
   async updateUser(data) {
     return await Server.axios('POST', baseURL, '/updateuser',
