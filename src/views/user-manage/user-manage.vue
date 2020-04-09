@@ -213,7 +213,6 @@ export default {
      * 按名称搜索即获取匹配用户信息
      */
     searchUser() {
-      this.loading = true;
       // 每次搜索前将表格重置为第一页
       this.currentPage = 1;
       // 去除搜索框内空格
@@ -229,6 +228,7 @@ export default {
      * @param user_name 用户名称
      */
     async getUserByUserName() {
+      this.loading = true;
       try {
         let params = {
           user_name: this.keyword

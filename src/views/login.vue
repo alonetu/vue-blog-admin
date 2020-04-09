@@ -1,92 +1,85 @@
 <template>
-  <div class="login">
-    <el-form 
-      class="login-container" 
-      ref="loginForm" 
-      :model="loginForm" 
-      :rules="loginRules" 
-      label-position="left" 
+  <div class="login-page">
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :hide-required-asterisk=true
+      label-width="80px"
+      class="login-page-container"
     >
-      <h2>Welcome</h2>
-      <el-form-item prop="username">
+      <el-form-item
+        prop="username"
+        label="username:"
+        :rules="[{ required: true, message: '请输入账号'}]"
+      >
         <el-input 
           v-model="loginForm.username" 
-          type="text" 
-          placeholder="账号" 
+          placeholder="请输入账号"
         />
       </el-form-item>
-      <el-form-item prop="password">
+      <el-form-item
+        prop="password"
+        label="password:"
+        :rules="[{ required: true, message: '请输入密码' }]"
+      >
         <el-input 
           v-model="loginForm.password" 
-          type="password"
-          placeholder="密码" 
+          type="password" 
+          placeholder="请输入密码"
         />
       </el-form-item>
-      <el-checkbox v-model="checked" checked>记住密码</el-checkbox>
-      <el-form-item>
+      <el-form-item style="margin-bottom: 0;">
         <el-button 
-          @click.native.prevent="handleLogin" 
-          :loading="loading" 
-          type="primary"
+          type="primary" 
+          size="small" 
+          @click="submitForm('loginForm')"
         >login</el-button>
-        <el-button type="primary" class="resetBtn">reset</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
  
 <script>
-
 export default {
-  name: 'login',
+  name: "login",
   data() {
     return {
       loginForm: {
-        username: 'admin',
-        password: '123456'
-      },
-      loginRules: {
-        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      },
-      checked: true,
-      loading: false
-    }
+        username: "admin",
+        password: "123456"
+      }
+    };
   },
   methods: {
-    handleLogin() {
-      this.$router.push({ path: '/main-view/home-page' });
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$router.push({ path: "/main-view/home-page" });
+        } else {
+          return false;
+        }
+      })
     }
   }
 }
 </script>
  
 <style lang="less">
-body {
-  background: #dfe9fb;
-}
-.login {
+.login-page {
   position: absolute;
   display: flex;
   width: 100%;
   height: 100%;
-  /* css3线性渐变 */
-  background-image: linear-gradient(45deg, #9fbaa8, #57606f);
+  background-image: linear-gradient(45deg, #9fbaa8, #57606f); // CSS3背景线性渐变
   transition: 0.4s;
-  .login-container {
-    width: 350px;
+  .login-page-container {
+    width: 400px;
+    padding: 24px;
+    border: 1px solid #57606f;
     margin: auto;
-    border: 1px solid #ced6e0;
-    box-sizing: border-box;
-    padding: 10px 30px;
-    border-radius: 5px;
     .el-button {
       width: 100%;
-      box-sizing: border-box;
-      margin: 10px 0;
-    }
-    .el-button+.el-button {
-      margin-left: 0;
+      height: 32px;
     }
   }
 }
