@@ -52,7 +52,7 @@
         :rules="[
           { required: true, message: '部门必填项' }
         ]"
-      >
+      > 
         <el-input v-model.number="editData.user_department"></el-input>
       </el-form-item>
       <el-form-item
@@ -74,6 +74,7 @@
 
 <script>
 import API from "../api";
+// 格式化时间组件
 import moment from 'moment';
 
 export default {
@@ -88,15 +89,10 @@ export default {
       default: null
     }
   },
-  updated() {
-    if (this.editData === 2) {
-      this.resetForm("editData");
-    }
-  },
-  data() {
-    return {};
-  },
   methods: {
+    /**
+     * 提交验证表单
+     */
     submitForm(formName, data) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -111,12 +107,16 @@ export default {
         this.getUsers();
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
-    getUsers() {
-      this.$emit("getUserList");
-    },
+    /**
+     * 添加用户
+     * @param user_cname 用户中文名称
+     * @param user_name 用户账号
+     * @param user_password 用户密码
+     * @param user_department 用户所在部门
+     * @param user_role 用户角色
+     * @param create_time 创建时间
+     * @param update_time 更新时间
+     */
     async addUser(data) {
       let params = {
         user_cname: data.user_cname,
@@ -141,6 +141,17 @@ export default {
         console.log(err);
       }
     },
+    /**
+     * 更新用户
+     * @param id 用户id
+     * @param user_cname 用户中文名称
+     * @param user_name 用户账号
+     * @param user_password 用户密码
+     * @param user_department 用户所在部门
+     * @param user_role 用户角色
+     * @param create_time 创建时间
+     * @param update_time 更新时间
+     */
     async updateUser(data) {
       let params = {
         id: data.id,
@@ -165,6 +176,19 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    /**
+     * 重置表格方法
+     */
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    /**
+     * 父子组件传值
+     * 向父组件发送事件，获取用户列表
+     */
+    getUsers() {
+      this.$emit("getUserList");
     },
     /**
      * 格式化时间

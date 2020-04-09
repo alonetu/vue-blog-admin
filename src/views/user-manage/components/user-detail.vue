@@ -1,63 +1,50 @@
 <template>
   <div class="user-detail">
-    <div class="user-info">
-      <span class="label">姓名：</span>
-      <span class="name">{{userDetail.user_cname}}</span>
-    </div>
-    <div class="user-info">
-      <span class="label">账号：</span>
-      <span class="name">{{userDetail.user_name}}</span>
-    </div>
-    <div class="user-info">
-      <span class="label">密码：</span>
-      <span class="name">{{userDetail.user_password}}</span>
-    </div>
-    <div class="user-info">
-      <span class="label">部门：</span>
-      <span class="name">{{userDetail.user_department}}</span>
-    </div>
-    <div class="user-info">
-      <span class="label">职位：</span>
-      <span class="name">{{userDetail.user_role}}</span>
-    </div>
-    <div class="user-info">
-      <span class="label">博客总数：</span>
-      <span class="name">{{userDetail.article_count}}</span>
-    </div>
-    <div class="user-info">
-      <span class="label">创建时间：</span>
-      <span class="name">{{userDetail.create_time}}</span>
-    </div>
-    <div class="user-info">
-      <span class="label">更新时间：</span>
-      <span class="name">{{userDetail.update_time}}</span>
-    </div>
+    <el-form label-position="left">
+      <el-form-item label="姓名:" prop="user_cname">
+        <span>{{ userDetail.user_cname }}</span>
+      </el-form-item>
+      <el-form-item label="账号:" prop="user_name">
+        <span v-html="userDetail.user_name"></span>
+      </el-form-item>
+      <el-form-item label="密码:" prop="user_password">
+        <span>{{ userDetail.user_password }}</span>
+      </el-form-item>
+      <el-form-item label="部门:" prop="user_department">
+        <span>{{ userDetail.user_department }}</span>
+      </el-form-item>
+      <el-form-item label="职位:" prop="user_role">
+        <span>{{ userDetail.user_role }}</span>
+      </el-form-item>
+      <el-form-item label="创建时间:" prop="create_time">
+        <span>{{ userDetail.create_time }}</span>
+      </el-form-item>
+      <el-form-item label="更新时间:" prop="update_time">
+        <span>{{ userDetail.update_time }}</span>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'user-detail',
+  name: "user-detail",
   props: {
     userDetail: {
       type: Object,
       default: () => {}
     }
   }
-}
+};
 </script>
 
 <style lang="less">
 .user-detail {
-  .user-info {
-    padding-left: 48px;
-    margin-bottom: 16px;
-    .label {
-      display: inline-block;
-      width: 142px;
-      text-align: right;
-      margin-right: 16px;
-    }
+  .el-form-item__label {
+    line-height: 24px;
+  }
+  .el-form-item__content {
+    line-height: 24px;
   }
 }
 </style>
