@@ -109,13 +109,13 @@ export default {
     },
     /**
      * 添加用户
-     * @param user_cname 用户中文名称
-     * @param user_name 用户账号
-     * @param user_password 用户密码
-     * @param user_department 用户所在部门
-     * @param user_role 用户角色
-     * @param create_time 创建时间
-     * @param update_time 更新时间
+     * @param (string) user_cname 用户中文名称
+     * @param (string) user_name 用户账号
+     * @param (string) user_password 用户密码
+     * @param (string) user_department 用户所在部门
+     * @param (string) user_role 用户角色
+     * @param (string) create_time 创建时间
+     * @param (string) update_time 更新时间
      */
     async addUser(data) {
       let params = {
@@ -143,14 +143,14 @@ export default {
     },
     /**
      * 更新用户
-     * @param id 用户id
-     * @param user_cname 用户中文名称
-     * @param user_name 用户账号
-     * @param user_password 用户密码
-     * @param user_department 用户所在部门
-     * @param user_role 用户角色
-     * @param create_time 创建时间
-     * @param update_time 更新时间
+     * @param (number) id 用户id
+     * @param (string) user_cname 用户中文名称
+     * @param (string) user_name 用户账号
+     * @param (string) user_password 用户密码
+     * @param (string) user_department 用户所在部门
+     * @param (string) user_role 用户角色
+     * @param (string) create_time 创建时间
+     * @param (string) update_time 更新时间
      */
     async updateUser(data) {
       let params = {

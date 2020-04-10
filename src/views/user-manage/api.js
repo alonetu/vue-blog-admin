@@ -1,7 +1,7 @@
 import Server from '@/axios/'
 import qs from 'qs'
 
-const baseURL = 'http://127.0.0.1:3000';
+const baseURL = process.env.NODE_ENV === 'development'?'/blog': '127.0.0.1:3000';
 
 export default {
   // 获取用户列表
@@ -15,8 +15,8 @@ export default {
   },
 
   // 模糊搜索
-  async getuserbykeyword(keyword) {
-    return await Server.axios('GET', baseURL, `/getuserbykeyword?keyword=${keyword}`)
+  async getuserbykeyword(params) {
+    return await Server.axios('GET', baseURL, `/getuserbykeyword?${params}`)
   },
 
   // 根据用户名获取用户信息

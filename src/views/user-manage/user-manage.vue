@@ -5,7 +5,7 @@
         <el-input
           class="search-input"
           v-model="keyword"
-          placeholder="请输入关键字查询"
+          placeholder="请输入关键字搜索"
           @keyup.enter.native="searchKeyword"
         >
           <i class="el-icon-search search-icon" slot="suffix" @click="searchKeyword"></i>
@@ -163,7 +163,6 @@
 import API from "./api";
 import qs from "qs"
 
-import { tableData } from "./data";
 import UserDetail from "./components/user-detail";
 import UserEdit from "./components/user-edit";
 
@@ -175,7 +174,7 @@ export default {
   },
   data() {
     return {
-      tableData,
+      tableData: [],
       loading: false,
       sortOrder: "DESC",
       sortField: "",
@@ -200,10 +199,10 @@ export default {
   methods: {
     /**
      * 分页获取用户信息, 表头排序
-     * @param pageNo 当前页
-     * @param pageSize 页数
-     * @param sortFiel 排序字段
-     * @param sort 排序方式 ASC|DESC
+     * @param (number) pageNo 当前页
+     * @param (number) pageSize 页数
+     * @param (string) sortFiel 排序字段
+     * @param (string) sort 排序方式 ASC|DESC
      */
     async getUserInfo() {
       this.loading = true;
@@ -243,12 +242,18 @@ export default {
     },
     /**
      * 根据关键字模糊匹配符合条件所有用户
-     * @param keyword 关键字
+     * @param (string) keyword 关键字
      */
     async getuserbykeyword() {
       this.loading = true;
+      let params = {
+        pageNo: this.currentPage,
+        pageSize: this.pageSize,
+        keyword: this.keyword,
+        sortField: this.sortField
+      }
       try {
-        let result = await API.getuserbykeyword(this.keyword);
+        let result = await API.getuserbykeyword(qs.stringify(params));
         let { code, message, pageTotal } = result;
         if (code === 200) {
           this.tableData = message;
@@ -291,7 +296,7 @@ export default {
     },
     /**
      * 点击编辑
-     * @param data 当前行信息
+     * @param (object) data 当前行信息
      */
     showEdit(data) {
       this.editTitle = "编辑用户";
@@ -327,7 +332,7 @@ export default {
     },
     /**
      * 删除接口
-     * @param id 用户id
+     * @param (number) id 用户id
      */
     async deleteUserById(id) {
       try {
