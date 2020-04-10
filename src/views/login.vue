@@ -75,7 +75,6 @@ export default {
   .login-page-container {
     width: 400px;
     padding: 24px;
-    border: 1px solid #57606f;
     margin: auto;
     .el-button {
       width: 100%;

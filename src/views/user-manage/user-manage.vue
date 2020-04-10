@@ -5,10 +5,10 @@
         <el-input
           class="search-input"
           v-model="keyword"
-          placeholder="请输出查询账号"
-          @keyup.enter.native="searchUser"
+          placeholder="请输入关键字查询"
+          @keyup.enter.native="searchKeyword"
         >
-          <i class="el-icon-search search-icon" slot="suffix" @click="searchUser"></i>
+          <i class="el-icon-search search-icon" slot="suffix" @click="searchKeyword"></i>
         </el-input>
         <el-button 
           size="small" 
@@ -31,7 +31,11 @@
           <el-table-column 
             prop="user_cname" 
             label="姓名"
-          ></el-table-column>
+          >
+          <template slot-scope="scope">
+              <span v-html="scope.row.user_cname"></span>
+            </template>
+          </el-table-column>
           <el-table-column 
             prop="user_name" 
             label="账号" 
@@ -46,13 +50,21 @@
             prop="user_department" 
             label="部门" 
             align="left"
-          ></el-table-column>
+          >
+            <template slot-scope="scope">
+              <span v-html="scope.row.user_department"></span>
+            </template>
+          </el-table-column>
           <el-table-column 
             prop="user_role" 
             label="职位" 
             align="left" 
             width="180"
-          ></el-table-column>
+          >
+            <template slot-scope="scope">
+              <span v-html="scope.row.user_role"></span>
+            </template>
+          </el-table-column>
           <el-table-column
             sortable="custom"
             prop="article_count"
@@ -66,14 +78,22 @@
             label="创建时间" 
             align="left" 
             width="200"
-          ></el-table-column>
+          >
+            <template slot-scope="scope">
+              <span v-html="scope.row.create_time"></span>
+            </template>
+          </el-table-column>
           <el-table-column 
             sortable 
             prop="update_time" 
             label="更新时间" 
             align="left" 
             width="200"
-          ></el-table-column>
+          >
+            <template slot-scope="scope">
+              <span v-html="scope.row.update_time"></span>
+            </template>
+          </el-table-column>
           <el-table-column 
             fixed="right" 
             label="操作" 
@@ -210,30 +230,25 @@ export default {
     /**
      * 搜索框调用方法
      * 为空搜索即获取用户列表
-     * 按名称搜索即获取匹配用户信息
+     * 按关键字搜索即获取匹配到所有用户
      */
-    searchUser() {
+    searchKeyword() {
       // 每次搜索前将表格重置为第一页
       this.currentPage = 1;
-      // 去除搜索框内空格
-      this.keyword = this.keyword.replace(new RegExp(' ', 'gm'), '');
       if (!this.keyword) {
         this.getUserInfo();
       } else {
-        this.getUserByUserName();
+        this.getuserbykeyword();
       }
     },
     /**
-     * 根据用户名称获取用户
-     * @param user_name 用户名称
+     * 根据关键字模糊匹配符合条件所有用户
+     * @param keyword 关键字
      */
-    async getUserByUserName() {
+    async getuserbykeyword() {
       this.loading = true;
       try {
-        let params = {
-          user_name: this.keyword
-        };
-        let result = await API.getUserByUserName(params);
+        let result = await API.getuserbykeyword(this.keyword);
         let { code, message, pageTotal } = result;
         if (code === 200) {
           this.tableData = message;
@@ -250,12 +265,14 @@ export default {
      * 搜索匹配字段高亮
      */
     handleHeighLight(data) {
-      data.forEach(item => {
-        item.user_name = item.user_name.replace(new RegExp(this.keyword, "gm"),
-          "<span style='color:red;font-weight:700'>" 
-          + this.keyword 
-          + "</span>"
-        );
+      data.forEach(fieldItem => {
+        Object.keys(fieldItem).forEach(keyItem => {
+          fieldItem[keyItem] = fieldItem[keyItem].toString().replace(new RegExp(this.keyword, "gm"),
+            "<span style='color:red;font-weight:700'>" 
+            + this.keyword 
+            + "</span>"
+          )
+        })
       });
     },
     /**

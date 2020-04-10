@@ -14,6 +14,11 @@ export default {
     return await Server.axios('GET', baseURL, `/getuserlist?${params}`)
   },
 
+  // 模糊搜索
+  async getuserbykeyword(keyword) {
+    return await Server.axios('GET', baseURL, `/getuserbykeyword?keyword=${keyword}`)
+  },
+
   // 根据用户名获取用户信息
   async getUserByUserName(params) {
     return await Server.axios('GET', baseURL, `/getuserbyusername?user_name=${params.user_name}`)
