@@ -210,14 +210,15 @@ export default {
         pageNo: this.currentPage,
         pageSize: this.pageSize,
         sortField: this.sortField,
-        sort: this.sortOrder
+        sort: this.sortOrder,
+        keyword: this.keyword
       };
       try {
         let result = await API.getUserList(qs.stringify(params));
         // ES6解构赋值
-        let { code, message, pageTotal } = result; 
+        let { code,data, pageTotal } = result; 
         if (code === 200) {
-          this.tableData = message;
+          this.tableData = data;
           this.pageTotal = pageTotal;
         }
       } catch (err) {
@@ -234,37 +235,8 @@ export default {
     searchKeyword() {
       // 每次搜索前将表格重置为第一页
       this.currentPage = 1;
-      if (!this.keyword) {
-        this.getUserInfo();
-      } else {
-        this.getuserbykeyword();
-      }
-    },
-    /**
-     * 根据关键字模糊匹配符合条件所有用户
-     * @param (string) keyword 关键字
-     */
-    async getuserbykeyword() {
-      this.loading = true;
-      let params = {
-        pageNo: this.currentPage,
-        pageSize: this.pageSize,
-        keyword: this.keyword,
-        sortField: this.sortField
-      }
-      try {
-        let result = await API.getuserbykeyword(qs.stringify(params));
-        let { code, message, pageTotal } = result;
-        if (code === 200) {
-          this.tableData = message;
-          this.pageTotal = pageTotal;
-          this.handleHeighLight(this.tableData);
-        }
-      } catch (err) {
-        console.log(err);
-      } finally {
-        this.loading = false;
-      }
+      this.getUserInfo();
+      // this.handleHeighLight(this.tableData);
     },
     /**
      * 搜索匹配字段高亮

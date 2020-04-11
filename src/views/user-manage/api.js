@@ -9,14 +9,9 @@ export default {
     return await Server.axios('GET', baseURL, `/getusers`)
   },
 
-  // 分页获取用户列表, 表头排序
+  // 分页获取用户列表, 表头排序, 模糊搜索
   async getUserList(params) {
     return await Server.axios('GET', baseURL, `/getuserlist?${params}`)
-  },
-
-  // 模糊搜索
-  async getuserbykeyword(params) {
-    return await Server.axios('GET', baseURL, `/getuserbykeyword?${params}`)
   },
 
   // 根据用户名获取用户信息
