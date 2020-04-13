@@ -8,7 +8,11 @@
           placeholder="请输入关键字搜索"
           @keyup.enter.native="searchKeyword"
         >
-          <i class="el-icon-search search-icon" slot="suffix" @click="searchKeyword"></i>
+          <i 
+            class="el-icon-search search-icon" 
+            slot="suffix" 
+            @click="searchKeyword"
+          ></i>
         </el-input>
         <el-button 
           size="small" 
@@ -71,9 +75,13 @@
             label="博客总数"
             align="left"
             width="140"
-          ></el-table-column>
+          >
+            <template slot-scope="scope">
+              <span v-html="scope.row.article_count"></span>
+            </template>
+          </el-table-column>
           <el-table-column 
-            sortable 
+            sortable="custom"
             prop="create_time" 
             label="创建时间" 
             align="left" 
@@ -84,7 +92,7 @@
             </template>
           </el-table-column>
           <el-table-column 
-            sortable 
+            sortable="custom"
             prop="update_time" 
             label="更新时间" 
             align="left" 
@@ -185,7 +193,7 @@ export default {
       detailVisible: false,
       editVisible: false,
       editTitle: "新增用户",
-      editType: 1, // 1,表示編輯，2,表示新增
+      editType: 1, // 1,表示编辑，2,表示新增
       editData: {}
     };
   },
@@ -216,8 +224,9 @@ export default {
       try {
         let result = await API.getUserList(qs.stringify(params));
         // ES6解构赋值
-        let { code,data, pageTotal } = result; 
+        let { code, data, pageTotal } = result; 
         if (code === 200) {
+          this.handleHeighLight(data);
           this.tableData = data;
           this.pageTotal = pageTotal;
         }
@@ -236,7 +245,6 @@ export default {
       // 每次搜索前将表格重置为第一页
       this.currentPage = 1;
       this.getUserInfo();
-      // this.handleHeighLight(this.tableData);
     },
     /**
      * 搜索匹配字段高亮
@@ -295,9 +303,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.loading = true;
           this.deleteUserById(id);
-          this.loading = false;
           this.getUserInfo();
         })
         .catch(() => {});
@@ -307,11 +313,13 @@ export default {
      * @param (number) id 用户id
      */
     async deleteUserById(id) {
+      this.loading = true;
       try {
         let params = { id };
         let result = await API.deleteUserById(params);
         let { code } = result;
         if (200 === code) {
+          this.resetCurrentPage();
           this.$notify.success({
             message: "删除当前行成功！",
             showClose: false,
@@ -326,6 +334,16 @@ export default {
         }
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
+      }
+    },
+    /**
+     * 删除当前页所有数据时，页码跳转到上一页
+     */
+    resetCurrentPage() {
+      if(this.pageTotal % this.pageSize === 1) {
+        this.currentPage = this.currentPage - 1;
       }
     },
     /**
