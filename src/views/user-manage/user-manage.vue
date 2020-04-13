@@ -37,7 +37,7 @@
             label="姓名"
           >
           <template slot-scope="scope">
-              <span v-html="scope.row.user_cname"></span>
+              <span v-html="setHeighLight(scope.row.user_cname)"></span>
             </template>
           </el-table-column>
           <el-table-column 
@@ -47,7 +47,7 @@
             sortable="custom"
           >
             <template slot-scope="scope">
-              <span v-html="scope.row.user_name"></span>
+              <span v-html="setHeighLight(scope.row.user_name)"></span>
             </template>
           </el-table-column>
           <el-table-column 
@@ -56,7 +56,7 @@
             align="left"
           >
             <template slot-scope="scope">
-              <span v-html="scope.row.user_department"></span>
+              <span v-html="setHeighLight(scope.row.user_department)"></span>
             </template>
           </el-table-column>
           <el-table-column 
@@ -66,7 +66,7 @@
             width="180"
           >
             <template slot-scope="scope">
-              <span v-html="scope.row.user_role"></span>
+              <span v-html="setHeighLight(scope.row.user_role)"></span>
             </template>
           </el-table-column>
           <el-table-column
@@ -77,7 +77,7 @@
             width="140"
           >
             <template slot-scope="scope">
-              <span v-html="scope.row.article_count"></span>
+              <span v-html="setHeighLight(scope.row.article_count)"></span>
             </template>
           </el-table-column>
           <el-table-column 
@@ -88,7 +88,7 @@
             width="200"
           >
             <template slot-scope="scope">
-              <span v-html="scope.row.create_time"></span>
+              <span v-html="setHeighLight(scope.row.create_time)"></span>
             </template>
           </el-table-column>
           <el-table-column 
@@ -99,7 +99,7 @@
             width="200"
           >
             <template slot-scope="scope">
-              <span v-html="scope.row.update_time"></span>
+              <span v-html="setHeighLight(scope.row.update_time)"></span>
             </template>
           </el-table-column>
           <el-table-column 
@@ -222,11 +222,10 @@ export default {
         keyword: this.keyword
       };
       try {
-        let result = await API.getUserList(qs.stringify(params));
+        const result = await API.getUserList(qs.stringify(params));
         // ES6解构赋值
-        let { code, data, pageTotal } = result; 
+        const { code, data, pageTotal } = result; 
         if (code === 200) {
-          this.handleHeighLight(data);
           this.tableData = data;
           this.pageTotal = pageTotal;
         }
@@ -247,18 +246,16 @@ export default {
       this.getUserInfo();
     },
     /**
-     * 搜索匹配字段高亮
+     * 设置字段高亮
      */
-    handleHeighLight(data) {
-      data.forEach(fieldItem => {
-        Object.keys(fieldItem).forEach(keyItem => {
-          fieldItem[keyItem] = fieldItem[keyItem].toString().replace(new RegExp(this.keyword, "gm"),
-            "<span style='color:red;font-weight:700'>" 
-            + this.keyword 
-            + "</span>"
-          )
-        })
-      });
+    setHeighLight(field){
+      let tableItem = field;
+      tableItem = tableItem.toString().replace(new RegExp(this.keyword, "gm"),
+        "<span style='color:red;font-weight:700'>" 
+        + this.keyword 
+        + "</span>"
+      )
+      return tableItem;
     },
     /**
      * 改变页数调用方法
@@ -316,8 +313,8 @@ export default {
       this.loading = true;
       try {
         let params = { id };
-        let result = await API.deleteUserById(params);
-        let { code } = result;
+        const result = await API.deleteUserById(params);
+        const { code } = result;
         if (200 === code) {
           this.resetCurrentPage();
           this.$notify.success({
