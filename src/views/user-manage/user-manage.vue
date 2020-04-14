@@ -207,10 +207,10 @@ export default {
   methods: {
     /**
      * 分页获取用户信息, 表头排序
-     * @param (number) pageNo 当前页
-     * @param (number) pageSize 页数
-     * @param (string) sortFiel 排序字段
-     * @param (string) sort 排序方式 ASC|DESC
+     * @param {number} pageNo 当前页
+     * @param {number} pageSize 页数
+     * @param {string} sortFiel 排序字段
+     * @param {string} sort 排序方式 ASC|DESC
      */
     async getUserInfo() {
       this.loading = true;
@@ -307,7 +307,7 @@ export default {
     },
     /**
      * 删除接口
-     * @param (number) id 用户id
+     * @param {number} id 用户id
      */
     async deleteUserById(id) {
       this.loading = true;

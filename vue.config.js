@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  publicPath: '/vue-blg-admin/',
+  publicPath: '/',
   outputDir: 'vue-blg-admin',
   runtimeCompiler: true,
   transpileDependencies: ["element-ui/packages", "element-ui/src"],
