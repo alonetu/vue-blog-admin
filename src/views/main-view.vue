@@ -2,7 +2,7 @@
   <div class="main-view">
     <!-- 左侧导航栏 -->
     <div class="side-bar">
-      <div class="project-name">博客后台</div>
+      <div class="project-name">vue-blog-admin</div>
       <el-menu
         @open="handleOpen"
         @close="handleClose"
@@ -43,7 +43,7 @@
           </el-submenu>
         </el-menu>
       </div>
-      <!-- 路由跳转 -->
+      <!-- 内容显示区 路由跳转 -->
       <div class="container-router">
         <router-view></router-view>
       </div>

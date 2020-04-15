@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { Notification } from 'element-ui'
 
 Vue.use(Router);
 
@@ -40,5 +41,16 @@ const router = new Router({
     }
   ]
 })
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.auth) {
+//     Notification({
+//       type: 'warning',
+//       title: '需要认证'
+//     });
+//     next(false)
+//   } else {
+//     next();
+//   }
+// })
 
 export default router;

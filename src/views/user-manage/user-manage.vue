@@ -3,13 +3,15 @@
     <div class="user-container">
       <div class="user-container-header">
         <el-input
+          :clearable=true
           class="search-input"
+          size="small"
           v-model="keyword"
           placeholder="请输入关键字搜索"
           @keyup.enter.native="searchKeyword"
         >
           <i 
-            class="el-icon-search search-icon" 
+            class="el-icon-search el-input__icon" 
             slot="suffix" 
             @click="searchKeyword"
           ></i>
@@ -23,7 +25,7 @@
       <div class="user-container-table">
         <el-table
           :data="tableData"
-          :loading="loading"
+          :loading="tableLoading"
           style="width: 100%"
           @sort-change="changeTableSort"
         >
@@ -183,7 +185,7 @@ export default {
   data() {
     return {
       tableData: [],
-      loading: false,
+      tableLoading: false,
       sortOrder: "DESC",
       sortField: "",
       currentPage: 1,
@@ -213,7 +215,7 @@ export default {
      * @param {string} sort 排序方式 ASC|DESC
      */
     async getUserInfo() {
-      this.loading = true;
+      this.tableLoading = true;
       let params = {
         pageNo: this.currentPage,
         pageSize: this.pageSize,
@@ -250,6 +252,9 @@ export default {
      */
     setHeighLight(field){
       let tableItem = field;
+      if(tableItem == null) {
+        return tableItem;
+      }
       tableItem = tableItem.toString().replace(new RegExp(this.keyword, "gm"),
         "<span style='color:red;font-weight:700'>" 
         + this.keyword 
@@ -273,7 +278,7 @@ export default {
     },
     /**
      * 点击编辑
-     * @param (object) data 当前行信息
+     * @param {object} data 当前行信息
      */
     showEdit(data) {
       this.editTitle = "编辑用户";
@@ -310,7 +315,7 @@ export default {
      * @param {number} id 用户id
      */
     async deleteUserById(id) {
-      this.loading = true;
+      this.tableLoading = true;
       try {
         let params = { id };
         const result = await API.deleteUserById(params);
@@ -332,7 +337,8 @@ export default {
       } catch (err) {
         console.log(err);
       } finally {
-        this.loading = false;
+        this.getUserInfo();
+        this.tableLoading = false;
       }
     },
     /**
@@ -370,7 +376,7 @@ export default {
 .user-manage {
   .user-container-header {
     width: 100%;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     .search-input {
       width: 400px;
       margin-right: 8px;
