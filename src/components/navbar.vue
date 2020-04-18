@@ -28,15 +28,9 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 
 export default {
   name: "navbar",
-  computed: {
-    ...mapState({
-      username:state=>state.user.user_cname
-    })
-  },
   data() {
     return {
       isShowSidebar: true,
@@ -51,7 +45,8 @@ export default {
           label: '退出',
           path: '/login'
         }
-      ]
+      ],
+      username: JSON.parse(sessionStorage.getItem('user')).user_cname
     }
   },
   methods: {

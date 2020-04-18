@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Guid from "@/utils/guid";
+import {getGuid} from "@/utils/";
 import echarts from "echarts";
 
 export default {
@@ -15,7 +15,7 @@ export default {
   },
   props: ["echartData", "guid"],
   created: function() {
-    this.id = Guid.methods.getGuid();
+    this.id = getGuid();
   },
   mounted: function() {
     this.echarts = echarts.init(document.getElementById(this.id + ""));

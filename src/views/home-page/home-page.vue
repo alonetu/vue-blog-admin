@@ -1,13 +1,14 @@
 <template>
   <div class="home-page wrapper-main">
-    <echart :echartData="barGraph"/>
-    <echart :echartData="lineChart"/>
+    <echart :echartData="barGraph" :guid="barGraphId"/>
+    <echart :echartData="lineChart" :guid="lineChartId"/>
   </div>
 </template>
 
 <script>
 import Echart from '@/components/echart.vue'
 import {barGraph, lineChart} from './data'
+import {getGuid} from '@/utils/'
 
 export default {
   name: 'home-page',
@@ -17,7 +18,9 @@ export default {
   data() {
     return {
       barGraph,
-      lineChart
+      lineChart,
+      barGraphId: getGuid(),
+      lineChartId: getGuid()
     }
   }
 }
