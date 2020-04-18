@@ -9,12 +9,13 @@ const MainView = () => import('../views/main-view.vue')
 const HomePage = () => import('../views/home-page/home-page.vue')
 const UserManage = () => import('../views/user-manage/user-manage.vue')
 const BlogManage = () => import('../views/blog-manage/blog-manage.vue')
+const PersonCenter = () => import('../views/person-center/person-center')
 
 const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/login',
       component: Login
     },
     {
@@ -36,21 +37,22 @@ const router = new Router({
           path: 'blog-manage',
           name: 'blog-manage',
           component: BlogManage
+        },
+        {
+          path: 'person-center',
+          name: 'person-center',
+          component: PersonCenter
         }
       ]
+    },
+    {
+      path: '*',
+      redirect: '/login'
     }
   ]
 })
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.auth) {
-//     Notification({
-//       type: 'warning',
-//       title: '需要认证'
-//     });
-//     next(false)
-//   } else {
-//     next();
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  next();
+})
 
 export default router;
