@@ -10,7 +10,7 @@
       @command="handleRouter"
     >
       <span class="el-dropdown-link">
-        admin
+        {{ username }}
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -28,8 +28,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "navbar",
+  computed: {
+    ...mapState({
+      username:state=>state.user.user_cname
+    })
+  },
   data() {
     return {
       isShowSidebar: true,

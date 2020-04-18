@@ -52,7 +52,17 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  next();
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  if(to.path === '/login') {
+    sessionStorage.setItem('user', JSON.stringify({}));
+    next();
+  }else {
+    if(!user.user_name) {
+      next('/login');
+    }else {
+      next();
+    }
+  }
 })
 
 export default router;

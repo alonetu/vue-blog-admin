@@ -10,7 +10,7 @@
       <el-form-item
         prop="username"
         label="username:"
-        :rules="[{ required: true, message: '请输入账号'}]"
+        :rules="[{ required: true, message: '请输入账号', trigger: 'blur' }]"
       >
         <el-input 
           v-model="loginForm.username" 
@@ -20,7 +20,7 @@
       <el-form-item
         prop="password"
         label="password:"
-        :rules="[{ required: true, message: '请输入密码' }]"
+        :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]"
       >
         <el-input 
           v-model="loginForm.password" 
@@ -40,21 +40,49 @@
 </template>
  
 <script>
+import Server from '@/axios/'
+import { Notification } from 'element-ui'
+
 export default {
   name: "login",
   data() {
     return {
       loginForm: {
         username: "admin",
-        password: "123456"
+        password: "123"
       }
     };
   },
   methods: {
+    async handleLogin(user_name) {
+      const baseURL = process.env.NODE_ENV === 'development'?'/blog': '127.0.0.1:3000';
+      return await Server.axios('GET', baseURL, `/getuserbyusername?user_name=${user_name}`)
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$router.push({ path: "/main-view/home-page" });
+          this.handleLogin(this.loginForm.username)
+              .then(res => {
+                const {code, data} = res;
+                const user = data[0];
+                if(code !== 200 || user.user_password !== this.loginForm.password) {
+                  return Notification.error({
+                    message: '用户名或密码错误',
+                    showClose: false,
+                    duration: 1000
+                  })
+                }
+                /**
+                 * 登录成功，将user信息写入session
+                 * 同时将user信息保存vuex
+                 * 跳转到home-page页面
+                 */
+                sessionStorage.setItem('user', JSON.stringify(user));
+                this.$store.commit('login', user);
+                this.$router.push({ path: "/main-view/home-page" });
+              }, err => {
+                console.log(err);
+              })
         } else {
           return false;
         }
