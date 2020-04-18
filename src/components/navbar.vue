@@ -10,7 +10,7 @@
       @command="handleRouter"
     >
       <span class="el-dropdown-link">
-        {{ username }}
+        {{ $store.state.user.name }}
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -45,8 +45,7 @@ export default {
           label: '退出',
           path: '/login'
         }
-      ],
-      username: JSON.parse(sessionStorage.getItem('user')).user_cname
+      ]
     }
   },
   methods: {
@@ -58,6 +57,9 @@ export default {
       this.$emit('checkCollapse', !this.isShowSidebar);
     },
     handleRouter(path) {
+      if(path === '/login') {
+        this.$store.commit('login', {});
+      }
       this.$router.push({path});
     }
   }

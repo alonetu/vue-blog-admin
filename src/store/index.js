@@ -8,10 +8,7 @@ import muduleA from './mudules/muduleA'
 
 Vue.use(Vuex)
 
-const state = {
-  // user 保存登录用户信息
-  user: {}
-}
+const state = sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state')) : {};
 
 export default new Vuex.Store({
   state,

@@ -81,8 +81,8 @@ export default {
 .el-menu-sidebar {
   height: 100%;
   .menu-sidebar-head{
-    height: 64px;
-    line-height: 64px;
+    height: 60px;
+    line-height: 60px;
     margin-bottom: 2px;
     &:hover {
       background: transparent;

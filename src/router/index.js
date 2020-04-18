@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { Notification } from 'element-ui'
 
 Vue.use(Router);
 
@@ -52,12 +51,12 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  const state = sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state')) : {};
   if(to.path === '/login') {
-    sessionStorage.setItem('user', JSON.stringify({}));
+    sessionStorage.setItem('state', JSON.stringify({}));
     next();
   }else {
-    if(!user.user_name) {
+    if(!state.user) {
       next('/login');
     }else {
       next();
