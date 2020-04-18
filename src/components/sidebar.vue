@@ -4,9 +4,9 @@
     :unique-opened=true
     :collapse="isCollapse"
     class="el-menu-sidebar"
-    background-color="#545c64"
+    background-color="#1f2d3d"
     text-color="#fff"
-    active-text-color="#ffd04b"
+    active-text-color="#1890ff"
     router
   >
     <el-menu-item class="menu-sidebar-head">
@@ -57,17 +57,17 @@ export default {
       defaultPage: '/main-view/home-page',
       sideMenu: [
         {
-          icon: 'el-icon-menu',
+          icon: 'el-icon-data-analysis',
           label: '统计',
           path: '/main-view/home-page'
         },
         {
-          icon: 'el-icon-menu',
+          icon: 'el-icon-user',
           label: '用户管理',
           path: '/main-view/user-manage'
         },
         {
-          icon: 'el-icon-menu',
+          icon: 'el-icon-notebook-1',
           label: '博客管理',
           path: '/main-view/blog-manage'
         }

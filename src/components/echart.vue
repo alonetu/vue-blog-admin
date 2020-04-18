@@ -13,7 +13,16 @@ export default {
       echarts: null
     };
   },
-  props: ["echartData", "guid"],
+  props: {
+    echartData: {
+      type: Object,
+      default: () => {}
+    },
+    guid: {
+      type: String,
+      default: ''
+    }
+  },
   created: function() {
     this.id = getGuid();
   },
@@ -47,11 +56,11 @@ export default {
     }
   },
   watch: {
-    guid: function() {
+    guid() {
       this.initEchart();
     },
     echartData: {
-      handler: function() {
+      handler() {
         this.initEchart();
       },
       deep: true

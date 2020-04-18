@@ -110,34 +110,20 @@
             width="120"
           >
             <template slot-scope="scope">
-              <el-tooltip 
-                class="item" 
-                effect="dark" 
-                content="编辑当前行" 
-                placement="bottom"
-              >
-                <el-button
-                  @click="showEdit(scope.row)"
-                  size="small"
-                  type="primary"
-                  icon="el-icon-edit"
-                  circle
-                ></el-button>
-              </el-tooltip>
-              <el-tooltip 
-                class="item" 
-                effect="dark" 
-                content="删除当前行" 
-                placement="bottom"
-              >
-                <el-button
-                  @click="deleteRow(scope.row.id)"
-                  size="small"
-                  type="danger"
-                  icon="el-icon-delete"
-                  circle
-                ></el-button>
-              </el-tooltip>
+              <el-button
+                @click="showEdit(scope.row)"
+                size="small"
+                type="primary"
+                icon="el-icon-edit"
+                circle
+              ></el-button>
+              <el-button
+                @click="deleteRow(scope.row.id)"
+                size="small"
+                type="danger"
+                icon="el-icon-delete"
+                circle
+              ></el-button>
             </template>
           </el-table-column>
         </el-table>

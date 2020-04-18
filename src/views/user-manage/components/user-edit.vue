@@ -11,7 +11,8 @@
         label="姓名"
         prop="user_cname"
         :rules="[
-          { required: true, message: '姓名不能为空' }
+          { required: true, message: '姓名不能为空', trigger: 'blur' },
+          { min: 2, max: 10, message: '姓名长度2-10位', trigger: 'blur' }
         ]"
       >
         <el-input 
@@ -24,7 +25,8 @@
         label="账号"
         prop="user_name"
         :rules="[
-          { required: true, message: '账号不能为空' }
+          { required: true, message: '账号不能为空', trigger: 'blur' },
+          { min: 3, max: 10, message: '账号长度3-10位', trigger: 'blur' }
         ]"
       >
         <el-input 
@@ -37,7 +39,8 @@
         label="密码"
         prop="user_password"
         :rules="[
-          { required: true, message: '密码不能为空' }
+          { required: true, message: '密码不能为空', trigger: 'blur' },
+          { min: 3, message: '密码长度最低3位', trigger: 'blur' }
         ]"
       >
         <el-input 
@@ -50,7 +53,8 @@
         label="部门"
         prop="user_department"
         :rules="[
-          { required: true, message: '部门必填项' }
+          { required: true, message: '部门必填项', trigger: 'blur' },
+          { min: 2, message: '部门名称最低2位', trigger: 'blur' }
         ]"
       > 
         <el-input v-model.number="editData.user_department"></el-input>
@@ -59,7 +63,7 @@
         label="职位"
         prop="user_role"
         :rules="[
-          { required: true, message: '职位必填项' }
+          { required: true, message: '职位必填项', trigger: 'blur' }
         ]"
       >
         <el-input v-model.number="editData.user_role"></el-input>
