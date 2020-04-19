@@ -55,7 +55,9 @@ export default {
   },
   mounted() {
     const state = JSON.parse(sessionStorage.getItem('state'));
+    console.log(state.path)
     this.defaultPage = state.path ? state.path : '/main-view/home-page';
+    console.log(this.defaultPage)
   },
   data() {
     return {

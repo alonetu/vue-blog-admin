@@ -65,7 +65,6 @@ export default {
               .then(res => {
                 const {code, data} = res;
                 const user = data[0];
-                const userInfo = {name: user.user_cname, id: user.user_name};
                 if(code !== 200 || user.user_password !== this.loginForm.password) {
                   return Notification.error({
                     message: '用户名或密码错误',
@@ -78,10 +77,13 @@ export default {
                  * 同时将user信息保存vuex
                  * 跳转到home-page页面
                  */
+                const userInfo = {name: user.user_cname, id: user.user_name};
+                const defaultPage = "/main-view/home-page";
                 this.$store.commit('login', userInfo);
+                this.$store.commit('defaultMenu', defaultPage);
                 this.$nextTick(() => {
                   sessionStorage.setItem('state', JSON.stringify(this.$store.state));
-                  this.$router.push({ path: "/main-view/home-page" });
+                  this.$router.push({ path: defaultPage });
                 })
               }, err => {
                 console.log(err);
