@@ -57,8 +57,8 @@ export default {
       height: 60px;
     }
     .container-router {
-      margin-top: 16px;
-      height: calc(~"100% - 76px");
+      padding: 24px;
+      height: calc(~"100% - 108px");
       overflow: auto;
     }
   }

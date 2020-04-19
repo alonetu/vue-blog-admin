@@ -7,6 +7,7 @@
     background-color="#1f2d3d"
     text-color="#fff"
     active-text-color="#1890ff"
+    @select="activeMenu"
     router
   >
     <el-menu-item class="menu-sidebar-head">
@@ -52,9 +53,13 @@ export default {
       default: false
     }
   },
+  mounted() {
+    const state = JSON.parse(sessionStorage.getItem('state'));
+    this.defaultPage = state.path ? state.path : '/main-view/home-page';
+  },
   data() {
     return {
-      defaultPage: '/main-view/home-page',
+      defaultPage: '',
       sideMenu: [
         {
           icon: 'el-icon-data-analysis',
@@ -72,6 +77,12 @@ export default {
           path: '/main-view/blog-manage'
         }
       ]
+    }
+  },
+  methods: {
+    activeMenu(index, indexPath) {
+      this.$store.commit('defaultMenu', index);
+      sessionStorage.setItem('state', JSON.stringify(this.$store.state));
     }
   }
 }

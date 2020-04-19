@@ -7,6 +7,7 @@
     ></i>
     <el-dropdown 
       class="show-submenu"
+      trigger="click"
       @command="handleRouter"
     >
       <span class="el-dropdown-link">
@@ -18,6 +19,7 @@
           <el-dropdown-item
             :key="itemMenu.path"
             :command="itemMenu.path"
+            :divided="itemMenu.path==='/login'?true:false"
           >
             {{ itemMenu.label }}
           </el-dropdown-item>

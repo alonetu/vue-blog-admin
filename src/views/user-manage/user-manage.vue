@@ -360,6 +360,7 @@ export default {
 
 <style lang="less">
 .user-manage {
+  padding: 24px;
   .user-container-header {
     width: 100%;
     margin-bottom: 24px;
