@@ -9,7 +9,7 @@ export const barGraph = {
     }
   },
   legend: {
-    data: ['warning', 'restore'],
+    data: ['用户', '博客'],
     bottom: 4
   },
   grid: {
@@ -34,7 +34,7 @@ export const barGraph = {
     },
   }],
   series: [{
-      name: 'warning',
+      name: '用户',
       type: 'bar',
       stack: 'data',
       data: [120, 132, 102, 134, 90, 230, 210, 110, 120, 140, 220, 220],
@@ -44,7 +44,7 @@ export const barGraph = {
       barWidth: 20
     },
     {
-      name: 'restore',
+      name: '博客',
       type: 'bar',
       stack: 'data',
       data: [220, 182, 191, 234, 290, 330, 310, 120, 330, 230, 210, 110],

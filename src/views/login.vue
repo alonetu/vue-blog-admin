@@ -9,31 +9,36 @@
     >
       <el-form-item
         prop="username"
-        label="username:"
         :rules="[{ required: true, message: '请输入账号', trigger: 'blur' }]"
       >
         <el-input 
           v-model="loginForm.username" 
           placeholder="请输入账号"
-        />
+          size="medium"
+        >
+          <i slot="prefix" class="el-icon-user "></i>
+        </el-input>
       </el-form-item>
       <el-form-item
         prop="password"
-        label="password:"
         :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]"
       >
         <el-input 
           v-model="loginForm.password" 
           type="password" 
           placeholder="请输入密码"
-        />
+          size="medium"
+          show-password
+        >
+          <i slot="prefix" class="el-icon-lock"></i>
+        </el-input>
       </el-form-item>
       <el-form-item style="margin-bottom: 0;">
         <el-button 
           type="primary" 
           size="small" 
           @click="submitForm('loginForm')"
-        >login</el-button>
+        >登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -73,8 +78,10 @@ export default {
                   })
                 }
                 /**
-                 * 登录成功，将user信息写入session
-                 * 同时将user信息保存vuex
+                 * 登录成功
+                 * 将首页路径写入vuex
+                 * 将用户信息保存vuex
+                 * 将vuex中的信息写入session
                  * 跳转到home-page页面
                  */
                 const userInfo = {name: user.user_cname, id: user.user_name};
@@ -113,6 +120,15 @@ export default {
       width: 100%;
       height: 32px;
     }
+  }
+  .el-input--medium .el-input__inner {
+    height: 42px;
+  }
+  .el-input--prefix .el-input__inner {
+    padding-left: 36px;
+  }
+  .el-input__prefix {
+    left: 10px;
   }
 }
 </style>

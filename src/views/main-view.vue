@@ -8,6 +8,7 @@
       <!-- 顶部导航栏 -->
       <div class="container-header">
         <navbar @checkCollapse="checkCollapse"/>
+        <tags/>
       </div>
       <!-- 内容显示区 路由跳转 -->
       <div class="container-router">
@@ -20,12 +21,14 @@
 <script>
 import sidebar from '@/components/sidebar'
 import navbar from '@/components/navbar'
+import tags from '@/components/tags'
 
 export default {
   name: 'main-view',
   components: {
     sidebar,
-    navbar
+    navbar,
+    tags
   },
   data() {
     return {
@@ -54,11 +57,11 @@ export default {
   .container {
     transition: width .2s linear;
     .container-header {
-      height: 60px;
+      height: 80px;
     }
     .container-router {
       padding: 24px;
-      height: calc(~"100% - 108px");
+      height: calc(~"100% - 128px");
       overflow: auto;
     }
   }
