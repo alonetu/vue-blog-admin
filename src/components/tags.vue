@@ -6,7 +6,8 @@
       v-for="item in tags"
       :key="item.label"
       :type="item.type"
-      @click="switchPage"
+      :class="item.path === path? 'active-tag': ''"
+      @click="switchPage(item.path)"
     >{{ item.label }}</el-tag>
   </div>
 </template>
@@ -16,29 +17,44 @@ export default {
   name: 'tag-router',
   data() {
     return {
+      path: '/main-view/home-page',
+      activePath: '/main-view/home-page',
       tags: [
         { 
           type: 'info', 
-          label: '首页'
+          label: '首页',
+          path: '/main-view/home-page'
         },
         { 
           type: 'info', 
-          label: '首页1'
+          label: '用户管理',
+          path: '/main-view/user-manage'
         },
         { 
           type: 'info', 
-          label: '首页2'
-        },
-        { 
-          type: 'info', 
-          label: '首页3'
+          label: '博客管理',
+          path: '/main-view/blog-manage'
         }
       ]
     }
   },
+  mounted() {
+    this.path = window.location.pathname;
+  },
+  watch: {
+    /**
+     * 监听路由变化
+     * 记录当前路由赋给当前tag
+     */
+    $route() {
+      this.path = window.location.pathname;
+    }
+  },
   methods: {
-    switchPage() {
-
+    switchPage(path) {
+      this.path = path;
+      this.$router.push({ path });
+      this.$emit('switchPage', path);
     }
   }
 }
@@ -55,6 +71,14 @@ export default {
   .el-tag--plain.el-tag--info {
     margin-top: 3px;
     margin-left: 5px;
+  }
+  .active-tag {
+    background-color: #42b983;
+    color: #fff;
+    border-color: #42b983;
+  }
+  .el-tag--plain.el-tag--info .el-tag__close {
+    color: #fff;
   }
 }
 </style>

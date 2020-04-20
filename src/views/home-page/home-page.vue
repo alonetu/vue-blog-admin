@@ -1,7 +1,7 @@
 <template>
   <div class="home-page wrapper-main">
-    <echart :echartData="barGraph" :guid="barGraphId"/>
-    <echart :echartData="lineChart" :guid="lineChartId"/>
+    <echart ref="chartBar" :echartData="barGraph" :guid="barGraphId"/>
+    <echart ref="chartLine" :echartData="lineChart" :guid="lineChartId"/>
   </div>
 </template>
 
@@ -21,6 +21,17 @@ export default {
       lineChart,
       barGraphId: getGuid(),
       lineChartId: getGuid()
+    }
+  },
+  computed: {
+    collapse() {
+      return this.$store.state.collapse;
+    }
+  },
+  watch: {
+    collapse() {
+      this.$refs.chartBar.initEchart();
+      this.$refs.chartLine.initEchart();
     }
   }
 }

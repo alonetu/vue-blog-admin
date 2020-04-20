@@ -63,6 +63,7 @@ export default {
      */
     handleCollapse() {
       this.isShowSidebar = !this.isShowSidebar;
+      this.$store.commit('collapse', this.isShowSidebar);
       this.$emit('checkCollapse', !this.isShowSidebar);
     },
     handleRouter(path) {

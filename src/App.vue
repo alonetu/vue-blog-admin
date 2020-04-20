@@ -7,7 +7,18 @@
 <script>
 
 export default {
-  name: 'app'
+  name: 'app',
+  mounted() {
+    /**
+     * 浏览器unload事件，当刷新浏览器时调用
+     */
+    window.addEventListener('unload', this.saveState)
+  },
+  methods: {
+    saveState() {
+      sessionStorage.setItem('state', JSON.stringify(this.$store.state));
+    }
+  }
 }
 </script>
 

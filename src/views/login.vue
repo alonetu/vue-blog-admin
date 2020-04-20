@@ -130,5 +130,10 @@ export default {
   .el-input__prefix {
     left: 10px;
   }
+  .el-input__inner {
+    background-color: #57606f;
+    border: 1px solid #606266;
+    color: #fff;
+  }
 }
 </style>

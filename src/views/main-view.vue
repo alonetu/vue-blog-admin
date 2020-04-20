@@ -2,13 +2,13 @@
   <div class="main-view">
     <!-- 左侧导航栏 -->
     <div class="side-bar" :style="{width: isCollapse ? '64px' : '200px'}">
-      <sidebar :isCollapse="isCollapse"/>
+      <sidebar :isCollapse="isCollapse" :routerPath="routerPath"/>
     </div>
     <div class="container" :style="{width: isCollapse ? 'calc(100% - 64px)' : 'calc(100% - 200px)'}">
       <!-- 顶部导航栏 -->
       <div class="container-header">
         <navbar @checkCollapse="checkCollapse"/>
-        <tags/>
+        <tags @switchPage="switchPage"/>
       </div>
       <!-- 内容显示区 路由跳转 -->
       <div class="container-router">
@@ -32,12 +32,16 @@ export default {
   },
   data() {
     return {
-      isCollapse: false
+      isCollapse: false,
+      routerPath: ''
     }
   },
   methods: {
     checkCollapse(res) {
       this.isCollapse = res;
+    },
+    switchPage(path) {
+      this.routerPath = path;
     }
   }
 };

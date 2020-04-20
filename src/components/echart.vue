@@ -7,12 +7,7 @@ import {getGuid} from "@/utils/";
 import echarts from "echarts";
 
 export default {
-  data() {
-    return {
-      id: "",
-      echarts: null
-    };
-  },
+  name: 'echart',
   props: {
     echartData: {
       type: Object,
@@ -23,15 +18,32 @@ export default {
       default: ''
     }
   },
-  created: function() {
+  created() {
     this.id = getGuid();
   },
-  mounted: function() {
+  mounted() {
     this.echarts = echarts.init(document.getElementById(this.id + ""));
     this.initEchart();
   },
+  data() {
+    return {
+      id: "",
+      echarts: null
+    };
+  },
+  watch: {
+    guid() {
+      this.echarts && this.echarts.resize();
+    },
+    echartData: {
+      handler() {
+        this.initEchart();
+      },
+      deep: true
+    }
+  },
   methods: {
-    initEchart: function() {
+    initEchart() {
       if (!this.echartData) {
         return;
       }
@@ -54,22 +66,6 @@ export default {
         this.echarts.resize();
       });
     }
-  },
-  watch: {
-    guid() {
-      this.initEchart();
-    },
-    echartData: {
-      handler() {
-        this.initEchart();
-      },
-      deep: true
-    }
   }
-};
+}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-
-</style>

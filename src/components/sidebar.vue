@@ -51,11 +51,22 @@ export default {
     isCollapse: {
       type: Boolean,
       default: false
+    },
+    routerPath: {
+      type: String,
+      default: '/main-view/home-page'
+    }
+  },
+  watch: {
+    routerPath: {
+      handler(val) {
+        this.defaultPage = val;
+      },
+      deep: true
     }
   },
   mounted() {
-    const state = JSON.parse(sessionStorage.getItem('state'));
-    this.defaultPage = state.path ? state.path : '/main-view/home-page';
+    this.defaultPage = window.location.pathname;
   },
   data() {
     return {

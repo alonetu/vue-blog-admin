@@ -4,5 +4,8 @@ export default {
   },
   defaultMenu(state, path) {
     state.path = path;
+  },
+  collapse(state, collapse) {
+    state.collapse = collapse;
   }
 }
