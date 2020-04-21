@@ -15,31 +15,26 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: 'tag-router',
   data() {
     return {
       path: '/main-view/home-page',
-      prePath: '/main-view/home-page',
-      activePath: '/main-view/home-page',
       tags: [
         {
           label: '首页',
           path: '/main-view/home-page'
-        },
-        {
-          label: '用户管理',
-          path: '/main-view/user-manage'
-        },
-        {
-          label: '博客管理',
-          path: '/main-view/blog-manage'
         }
       ]
     }
   },
   mounted() {
     this.path = window.location.pathname;
+  },
+  computed: {
+    ...mapState(['allOpenPage'])
   },
   watch: {
     /**
@@ -48,19 +43,33 @@ export default {
      */
     $route() {
       this.path = window.location.pathname;
+    },
+    /**
+     * 监听vuex中保存所有打开页面
+     */
+    allOpenPage() {
+      this.tags = this.allOpenPage;
     }
   },
   methods: {
+    /**
+     * 切换标签
+     */
     switchPage(path) {
       this.path = path;
       this.$router.push({ path });
       this.$emit('switchPage', path);
     },
+    /**
+     * 关闭标签时跳转到前一个页面
+     */
     handleClose(tag) {
       let index = this.tags.indexOf(tag);
       let preTag = this.tags[index - 1];
       this.tags.splice(index, 1);
       this.path = preTag.path;
+      // 如果关闭标签的前一个标签是当前页面则不做跳转
+      if(this.path === window.location.pathname) { return }
       this.$router.push(this.path);
     }
   }

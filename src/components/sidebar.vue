@@ -36,6 +36,7 @@
         v-else
         :index="menu.path"
         :key="menu.path"
+        @click="activePage(menu)"
       >
         <i :class="menu.icon"></i>
         <span slot="title">{{ menu.label }}</span>
@@ -90,13 +91,31 @@ export default {
           label: '博客管理',
           path: '/main-view/blog-manage'
         }
-      ]
+      ],
+      allOpenPage: [{
+        icon: 'el-icon-data-analysis',
+        label: '首页',
+        path: '/main-view/home-page'
+      }]
     }
   },
   methods: {
+    /**
+     * 路由跳转
+     */
     activeMenu(index, indexPath) {
       this.$store.commit('defaultMenu', index);
       sessionStorage.setItem('state', JSON.stringify(this.$store.state));
+    },
+    /**
+     * 保存已打开页面到vuex中
+     */
+    activePage(menu) {
+      if(menu.label === '首页') { return }
+      if(this.allOpenPage.indexOf(menu) === -1) {
+        this.allOpenPage.push(menu);
+      }
+      this.$store.commit('allOpenPage', this.allOpenPage);
     }
   }
 }
