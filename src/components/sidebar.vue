@@ -63,6 +63,9 @@ export default {
         this.defaultPage = val;
       },
       deep: true
+    },
+    $route() {
+      this.defaultPage = window.location.pathname;
     }
   },
   mounted() {

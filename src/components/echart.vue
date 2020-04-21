@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" :style="{'width':'100%','height':'400px'}"></div>
+  <div :id="id" :style="{'width':width,'height':height}"></div>
 </template>
 
 <script>
@@ -16,6 +16,14 @@ export default {
     guid: {
       type: String,
       default: ''
+    },
+    width: {
+      type: String,
+      default: '100%'
+    },
+    height: {
+      style: String,
+      default: '400px'
     }
   },
   created() {
@@ -65,6 +73,9 @@ export default {
       window.addEventListener("resize", () => {
         this.echarts.resize();
       });
+    },
+    resizeEchart() {
+      this.echarts && this.echarts.resize();
     }
   }
 }

@@ -7,7 +7,9 @@
       :key="item.label"
       :type="item.type"
       :class="item.path === path? 'active-tag': ''"
+      :closable="item.label==='首页'? false: true"
       @click="switchPage(item.path)"
+      @close="handleClose(item)"
     >{{ item.label }}</el-tag>
   </div>
 </template>
@@ -18,20 +20,18 @@ export default {
   data() {
     return {
       path: '/main-view/home-page',
+      prePath: '/main-view/home-page',
       activePath: '/main-view/home-page',
       tags: [
-        { 
-          type: 'info', 
+        {
           label: '首页',
           path: '/main-view/home-page'
         },
-        { 
-          type: 'info', 
+        {
           label: '用户管理',
           path: '/main-view/user-manage'
         },
-        { 
-          type: 'info', 
+        {
           label: '博客管理',
           path: '/main-view/blog-manage'
         }
@@ -55,6 +55,13 @@ export default {
       this.path = path;
       this.$router.push({ path });
       this.$emit('switchPage', path);
+    },
+    handleClose(tag) {
+      let index = this.tags.indexOf(tag);
+      let preTag = this.tags[index - 1];
+      this.tags.splice(index, 1);
+      this.path = preTag.path;
+      this.$router.push(this.path);
     }
   }
 }
@@ -68,7 +75,9 @@ export default {
   padding-left: 11px;
   padding-right: 16px;
   box-sizing: border-box;
-  .el-tag--plain.el-tag--info {
+  .el-tag--plain {
+    color: #495060;
+    border: 1px solid #d8dce5;
     margin-top: 3px;
     margin-left: 5px;
   }
@@ -77,7 +86,7 @@ export default {
     color: #fff;
     border-color: #42b983;
   }
-  .el-tag--plain.el-tag--info .el-tag__close {
+  .el-tag--plain .el-tag__close {
     color: #fff;
   }
 }
