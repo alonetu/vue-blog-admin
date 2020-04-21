@@ -32,6 +32,11 @@ export default {
   },
   mounted() {
     this.path = window.location.pathname;
+    // 如果sessionStorage中保存了所有打开的页面，则从sessionStage中取值
+    const state = sessionStorage.getItem('state');
+    if(state && JSON.parse(state).allOpenPage) {
+      this.tags = JSON.parse(state).allOpenPage;
+    }
   },
   computed: {
     ...mapState(['allOpenPage'])
