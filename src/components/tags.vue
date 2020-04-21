@@ -73,6 +73,7 @@ export default {
       let preTag = this.tags[index - 1];
       this.tags.splice(index, 1);
       this.path = preTag.path;
+      this.$store.commit('allOpenPage', this.tags);
       // 如果关闭标签的前一个标签是当前页面则不做跳转
       if(this.path === window.location.pathname) { return }
       this.$router.push(this.path);
