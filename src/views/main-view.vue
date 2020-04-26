@@ -12,7 +12,9 @@
       </div>
       <!-- 内容显示区 路由跳转 -->
       <div class="container-router">
-        <router-view/>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
       </div>
     </div>
   </div>

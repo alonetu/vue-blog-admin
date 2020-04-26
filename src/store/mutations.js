@@ -3,10 +3,6 @@ export default {
   login(state, obj) {
     state.user = obj;
   },
-  /** 默认打开页面 */
-  defaultMenu(state, path) {
-    state.path = path;
-  },
   /** 侧边栏是否展开状态 */
   collapse(state, collapse) {
     state.collapse = collapse;

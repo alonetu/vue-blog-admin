@@ -187,7 +187,7 @@ export default {
   },
   /**
    * 生命周期函数
-   * 页面创建是调用方法获取用户信息
+   * 页面创建时调用方法获取用户信息
    */
   created() {
     this.getUserInfo();

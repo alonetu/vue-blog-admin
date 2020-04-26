@@ -9,7 +9,7 @@
 import Echart from '@/components/echart.vue'
 import {barGraph, lineChart} from './data'
 import {getGuid} from '@/utils/'
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'home-page',
@@ -25,16 +25,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(["collapse"])
+    ...mapGetters(["collapse"])
   },
   watch: {
-    immediate: true,
-    collapse: {
-      handler(value) {
-        // this.$refs.chartBar.resizeEchart();
-        // this.$refs.chartLine.resizeEchart();
-      },
-      deep: true
+    collapse() {
+      setTimeout(() => {
+        this.$refs.chartBar.resizeEchart();
+        this.$refs.chartLine.resizeEchart();
+      }, 200);
     }
   }
 }

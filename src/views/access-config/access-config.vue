@@ -1,11 +1,11 @@
 <template>
-  <div class="person-center wrapper-main">
-    person-center
+  <div class="access-config wrapper-main">
+    access-config
   </div>
 </template>
 
 <style lang="less">
-.person-center {
+.access-config {
   padding: 24px;
   background-color: #fff;
 }

@@ -3,12 +3,12 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-const Login = () => import('../views/login.vue')
-const MainView = () => import('../views/main-view.vue')
-const HomePage = () => import('../views/home-page/home-page.vue')
-const UserManage = () => import('../views/user-manage/user-manage.vue')
-const BlogManage = () => import('../views/blog-manage/blog-manage.vue')
-const PersonCenter = () => import('../views/person-center/person-center')
+const Login = () => import('@/views/login')
+const MainView = () => import('@/views/main-view')
+const HomePage = () => import('@/views/home-page/home-page')
+const UserManage = () => import('@/views/user-manage/user-manage')
+const PersonCenter = () => import('@/views/person-center/person-center')
+const AccessConfig = () => import('@/views/access-config/access-config')
 
 const router = new Router({
   mode: 'history',
@@ -33,14 +33,14 @@ const router = new Router({
           component: UserManage
         },
         {
-          path: 'blog-manage',
-          name: 'blog-manage',
-          component: BlogManage
-        },
-        {
           path: 'person-center',
           name: 'person-center',
           component: PersonCenter
+        },
+        {
+          path: 'access-config',
+          name: 'access-config',
+          component: AccessConfig
         }
       ]
     },
@@ -51,17 +51,7 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  const state = sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state')) : {};
-  if(to.path === '/login') {
-    sessionStorage.setItem('state', JSON.stringify({}));
-    next();
-  }else {
-    if(!state.user) {
-      next('/login');
-    }else {
-      next();
-    }
-  }
+  next();
 })
 
 export default router;

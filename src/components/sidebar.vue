@@ -70,6 +70,10 @@ export default {
     }
   },
   mounted() {
+    const state = sessionStorage.getItem('vuex');
+    if(state && JSON.parse(state).allOpenPage) {
+      this.allOpenPage = JSON.parse(state).allOpenPage;
+    }
     this.defaultPage = window.location.pathname;
   },
   data() {
@@ -87,9 +91,14 @@ export default {
           path: '/main-view/user-manage'
         },
         {
-          icon: 'el-icon-notebook-1',
-          label: '博客管理',
-          path: '/main-view/blog-manage'
+          icon: 'el-icon-lock',
+          label: '权限管理',
+          path: '/main-view/access-config'
+        },
+        {
+          icon: 'el-icon-watch',
+          label: '个人中心',
+          path: '/main-view/person-center'
         }
       ],
       allOpenPage: [{
@@ -104,15 +113,13 @@ export default {
      * 路由跳转
      */
     activeMenu(index, indexPath) {
-      this.$store.commit('defaultMenu', index);
-      sessionStorage.setItem('state', JSON.stringify(this.$store.state));
     },
     /**
      * 保存已打开页面到vuex中
      */
     activePage(menu) {
       if(menu.label === '首页') { return }
-      if(this.allOpenPage.indexOf(menu) === -1) {
+      if(this.allOpenPage.findIndex(item => item.label === menu.label) === -1) {
         this.allOpenPage.push(menu);
       }
       this.$store.commit('allOpenPage', this.allOpenPage);

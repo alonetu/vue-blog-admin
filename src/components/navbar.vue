@@ -2,9 +2,10 @@
   <div class="navbar">
     <i 
       class="show-collapse" 
-      :class="isShowSidebar ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
+      :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
       @click="handleCollapse"
     ></i>
+    <breadcrumd class="breadcrumd-container"/>
     <el-dropdown 
       class="show-submenu"
       trigger="click"
@@ -37,12 +38,16 @@
 </template>
 
 <script>
+import Breadcrumd from '@/components/breadcrumb'
 
 export default {
   name: "navbar",
+  components: {
+    Breadcrumd
+  },
   data() {
     return {
-      isShowSidebar: true,
+      isCollapse: false,
       topMenu: [
         {
           icon: 'el-icon-menu',
@@ -62,9 +67,9 @@ export default {
      * 处理侧边栏显隐
      */
     handleCollapse() {
-      this.isShowSidebar = !this.isShowSidebar;
-      this.$store.commit('collapse', this.isShowSidebar);
-      this.$emit('checkCollapse', !this.isShowSidebar);
+      this.isCollapse = !this.isCollapse;
+      this.$store.commit('collapse', this.isCollapse);
+      this.$emit('checkCollapse', this.isCollapse);
     },
     handleRouter(path) {
       if(path === '/login') {

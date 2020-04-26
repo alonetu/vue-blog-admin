@@ -87,11 +87,7 @@ export default {
                 const userInfo = {name: user.user_cname, id: user.user_name};
                 const defaultPage = "/main-view/home-page";
                 this.$store.commit('login', userInfo);
-                this.$store.commit('defaultMenu', defaultPage);
-                this.$nextTick(() => {
-                  sessionStorage.setItem('state', JSON.stringify(this.$store.state));
-                  this.$router.push({ path: defaultPage });
-                })
+                this.$router.push({ path: defaultPage });
               }, err => {
                 console.log(err);
               })
