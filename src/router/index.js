@@ -29,22 +29,26 @@ const router = new Router({
         {
           path: 'home-page',
           name: 'home-page',
-          component: HomePage
+          component: HomePage,
+          meta: { title: '首页' }
         },
         {
           path: 'user-manage',
           name: 'user-manage',
-          component: UserManage
+          component: UserManage,
+          meta: { title: '用户管理' }
         },
         {
           path: 'person-center',
           name: 'person-center',
-          component: PersonCenter
+          component: PersonCenter,
+          meta: { title: '个人中心' }
         },
         {
           path: 'access-config',
           name: 'access-config',
-          component: AccessConfig
+          component: AccessConfig,
+          meta: { title: '权限配置' }
         }
       ]
     },

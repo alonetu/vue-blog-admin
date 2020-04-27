@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .user-detail {
   .el-form-item__label {
     line-height: 24px;

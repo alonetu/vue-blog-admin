@@ -91,7 +91,7 @@ export default {
         },
         {
           icon: 'el-icon-lock',
-          label: '权限管理',
+          label: '权限配置',
           path: '/access-config'
         },
         {

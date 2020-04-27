@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="less">
+<style lang="scss">
 .access-config {
   padding: 16px;
   background-color: #fff;

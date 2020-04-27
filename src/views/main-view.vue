@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .main-view {
   height: 100vh;
   display: flex;
@@ -67,7 +67,7 @@ export default {
     }
     .container-router {
       padding: 24px;
-      height: calc(~"100% - 128px");
+      height: calc(100% - 128px);
       overflow: auto;
     }
   }

@@ -204,7 +204,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .user-add {
   .user-add-ruleForm {
     input {

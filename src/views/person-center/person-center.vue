@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="less">
+<style lang="scss">
 .person-center {
   padding: 16px;
   background-color: #fff;

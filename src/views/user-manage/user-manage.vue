@@ -359,7 +359,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .user-manage {
   padding: 16px;
   .user-container-header {
