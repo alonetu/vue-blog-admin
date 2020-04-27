@@ -6,7 +6,7 @@
           :clearable=true
           class="search-input"
           size="small"
-          v-model="keyword"
+          v-model.trim="keyword"
           placeholder="请输入关键字搜索"
           @keyup.enter.native="searchKeyword"
         >
