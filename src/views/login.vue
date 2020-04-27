@@ -28,6 +28,7 @@
           type="password" 
           placeholder="请输入密码"
           size="medium"
+          @keyup.enter.native="submitForm()"
           show-password
         >
           <i slot="prefix" class="el-icon-lock"></i>
@@ -37,7 +38,7 @@
         <el-button 
           type="primary" 
           size="small" 
-          @click="submitForm('loginForm')"
+          @click="submitForm()"
         >登录</el-button>
       </el-form-item>
     </el-form>
@@ -63,8 +64,8 @@ export default {
       const baseURL = process.env.NODE_ENV === 'development'?'/blog': '127.0.0.1:3000';
       return await Server.axios('GET', baseURL, `/getuserbyusername?user_name=${user_name}`)
     },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm() {
+      this.$refs['loginForm'].validate(valid => {
         if (valid) {
           this.handleLogin(this.loginForm.username)
               .then(res => {
