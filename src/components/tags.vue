@@ -4,18 +4,20 @@
       size="small"
       effect="plain"
       v-for="item in tags"
-      :key="item.label"
+      :key="item.path"
       :type="item.type"
       :class="item.path === path? 'active-tag': ''"
       :closable="item.label==='首页'? false: true"
       @click="switchPage(item.path)"
       @close="handleClose(item)"
-    >{{ item.label }}</el-tag>
+    >
+      {{ item.label }}
+    </el-tag>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 import {getAllOpenPage} from '@/utils/'
 
 export default {
@@ -38,7 +40,7 @@ export default {
     this.tags = getAllOpenPage();
   },
   computed: {
-    ...mapState(['allOpenPage'])
+    ...mapGetters(['allOpenPage'])
   },
   watch: {
     /**

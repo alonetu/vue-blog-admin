@@ -1,3 +1,22 @@
+// 容器样式
+.wrapper-main {
+  padding: 16px;
+  min-height: calc(100% - 50px);
+  background-color: #fff;
+}
+
+//下拉菜单间距
+.el-dropdown-menu__item {
+  line-height: 24px;
+  padding: 4px 20px;
+}
+
+// tag样式调整
+.el-tag {
+  border-radius: 2px;
+  cursor: pointer;
+}
+
 // 表格样式重写
 .el-table {
   .el-table__header {
