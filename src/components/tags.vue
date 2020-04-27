@@ -16,6 +16,7 @@
 
 <script>
 import {mapState} from 'vuex'
+import {getAllOpenPage} from '@/utils/'
 
 export default {
   name: 'tag-router',
@@ -24,6 +25,7 @@ export default {
       path: '/home-page',
       tags: [
         {
+          icon: 'el-icon-data-analysis',
           label: '首页',
           path: '/home-page'
         }
@@ -33,10 +35,7 @@ export default {
   mounted() {
     this.path = window.location.pathname;
     // 如果sessionStorage中保存了所有打开的页面，则从sessionStage中取值
-    const state = sessionStorage.getItem('vuex');
-    if(state && JSON.parse(state).allOpenPage) {
-      this.tags = JSON.parse(state).allOpenPage;
-    }
+    this.tags = getAllOpenPage();
   },
   computed: {
     ...mapState(['allOpenPage'])

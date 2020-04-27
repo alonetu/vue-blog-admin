@@ -9,4 +9,18 @@ function getGuid() {
   });
 }
 
-export { getGuid }
+// 通过session获取所有已打开页面
+function getAllOpenPage() {
+  const firstPage = {
+    icon: 'el-icon-data-analysis',
+    label: '首页',
+    path: '/home-page'
+  }
+  const state = sessionStorage.getItem('vuex');
+  if(state && JSON.parse(state).allOpenPage) {
+    return JSON.parse(state).allOpenPage;
+  }
+  return [firstPage];
+}
+
+export { getGuid, getAllOpenPage }

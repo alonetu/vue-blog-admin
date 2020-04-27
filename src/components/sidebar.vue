@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import {getAllOpenPage} from '@/utils/'
+
 export default {
   name: 'sidebar',
   props: {
@@ -69,10 +71,8 @@ export default {
     }
   },
   mounted() {
-    const state = sessionStorage.getItem('vuex');
-    if(state && JSON.parse(state).allOpenPage) {
-      this.allOpenPage = JSON.parse(state).allOpenPage;
-    }
+    // 如果sessionStorage中保存了所有打开的页面，则从sessionStage中取值
+    this.allOpenPage = getAllOpenPage();
     this.defaultPage = window.location.pathname;
   },
   data() {
