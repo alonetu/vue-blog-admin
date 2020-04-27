@@ -7,7 +7,6 @@
     background-color="#1f2d3d"
     text-color="#fff"
     active-text-color="#1890ff"
-    @select="activeMenu"
     router
   >
     <el-menu-item class="menu-sidebar-head">
@@ -55,7 +54,7 @@ export default {
     },
     routerPath: {
       type: String,
-      default: '/main-view/home-page'
+      default: '/home-page'
     }
   },
   watch: {
@@ -83,43 +82,39 @@ export default {
         {
           icon: 'el-icon-data-analysis',
           label: '首页',
-          path: '/main-view/home-page'
+          path: '/home-page'
         },
         {
           icon: 'el-icon-user',
           label: '用户管理',
-          path: '/main-view/user-manage'
+          path: '/user-manage'
         },
         {
           icon: 'el-icon-lock',
           label: '权限管理',
-          path: '/main-view/access-config'
+          path: '/access-config'
         },
         {
           icon: 'el-icon-watch',
           label: '个人中心',
-          path: '/main-view/person-center'
+          path: '/person-center'
         }
       ],
       allOpenPage: [{
         icon: 'el-icon-data-analysis',
         label: '首页',
-        path: '/main-view/home-page'
+        path: '/home-page'
       }]
     }
   },
   methods: {
     /**
-     * 路由跳转
-     */
-    activeMenu(index, indexPath) {
-    },
-    /**
-     * 保存已打开页面到vuex中
+     * 路由跳转, 保存已打开页面到vuex中
      */
     activePage(menu) {
       if(menu.label === '首页') { return }
-      if(this.allOpenPage.findIndex(item => item.label === menu.label) === -1) {
+      const index = this.allOpenPage.findIndex(item => item.label === menu.label);
+      if(-1 === index) {
         this.allOpenPage.push(menu);
       }
       this.$store.commit('allOpenPage', this.allOpenPage);

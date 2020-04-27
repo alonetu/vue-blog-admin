@@ -6,7 +6,7 @@
 
 <style lang="less">
 .person-center {
-  padding: 24px;
+  padding: 16px;
   background-color: #fff;
 }
 </style>

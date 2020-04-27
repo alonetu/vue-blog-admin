@@ -108,6 +108,7 @@
             fixed="right" 
             label="操作" 
             width="120"
+            align="center"
           >
             <template slot-scope="scope">
               <el-button
@@ -360,7 +361,7 @@ export default {
 
 <style lang="less">
 .user-manage {
-  padding: 24px;
+  padding: 16px;
   .user-container-header {
     width: 100%;
     margin-bottom: 24px;

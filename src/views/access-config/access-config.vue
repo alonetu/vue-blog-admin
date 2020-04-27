@@ -6,7 +6,7 @@
 
 <style lang="less">
 .access-config {
-  padding: 24px;
+  padding: 16px;
   background-color: #fff;
 }
 </style>

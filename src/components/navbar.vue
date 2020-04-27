@@ -52,7 +52,7 @@ export default {
         {
           icon: 'el-icon-menu',
           label: '个人中心',
-          path: '/main-view/person-center'
+          path: '/person-center'
         },
         {
           icon: 'el-icon-menu',
@@ -71,6 +71,9 @@ export default {
       this.$store.commit('collapse', this.isCollapse);
       this.$emit('checkCollapse', this.isCollapse);
     },
+    /**
+     * 处理下拉菜单路由跳转
+     */
     handleRouter(path) {
       if(path === '/login') {
         this.$store.commit('login', {});

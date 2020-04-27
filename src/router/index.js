@@ -18,7 +18,7 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/main-view',
+      path: '/',
       name: 'main-view',
       component: MainView,
       children: [

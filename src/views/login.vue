@@ -85,7 +85,7 @@ export default {
                  * 跳转到home-page页面
                  */
                 const userInfo = {name: user.user_cname, id: user.user_name};
-                const defaultPage = "/main-view/home-page";
+                const defaultPage = "/home-page";
                 this.$store.commit('login', userInfo);
                 this.$router.push({ path: defaultPage });
               }, err => {

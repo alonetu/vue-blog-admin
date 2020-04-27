@@ -21,11 +21,11 @@ export default {
   name: 'tag-router',
   data() {
     return {
-      path: '/main-view/home-page',
+      path: '/home-page',
       tags: [
         {
           label: '首页',
-          path: '/main-view/home-page'
+          path: '/home-page'
         }
       ]
     }

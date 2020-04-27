@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+/** 引入vuex-persistedstate插件，持久化vuex内容 */
 import createdPersistedState from 'vuex-persistedstate'
 
 import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
-import muduleA from './mudules/muduleA'
+import user from './mudules/user'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,7 @@ const initState = {
   allOpenPage: [{
     icon: 'el-icon-data-analysis',
     label: '首页',
-    path: '/main-view/home-page'
+    path: '/home-page'
   }],
   collapse: false
 }
@@ -26,7 +27,8 @@ export default new Vuex.Store({
   actions,
   getters,
   mudules: {
-    muduleA
+    user
   },
+  /** 使用vuex-persistedstate插件将vuex内容动态写入sessionStorage */
   plugins: [createdPersistedState({ storage: window.sessionStorage })]
 })
