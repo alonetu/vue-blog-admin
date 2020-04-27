@@ -4,11 +4,6 @@ import qs from 'qs'
 const baseURL = process.env.NODE_ENV === 'development'?'/blog': '127.0.0.1:3000';
 
 export default {
-  // 获取用户列表
-  async getUserInfo() {
-    return await Server.axios('GET', baseURL, `/getusers`)
-  },
-
   // 分页获取用户列表, 表头排序, 模糊搜索
   async getUserList(params) {
     return await Server.axios('GET', baseURL, `/getuserlist?${params}`)

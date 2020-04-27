@@ -26,7 +26,7 @@
         prop="user_name"
         :rules="[
           { required: true, message: '账号不能为空', trigger: 'blur' },
-          { min: 3, max: 10, message: '账号长度3-10位', trigger: 'blur' }
+          { min: 3, max: 15, message: '账号长度3-10位', trigger: 'blur' }
         ]"
       >
         <el-input 

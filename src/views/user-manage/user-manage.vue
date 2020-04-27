@@ -114,7 +114,6 @@
               <el-button
                 @click="showEdit(scope.row)"
                 size="small"
-                type="primary"
                 icon="el-icon-edit"
                 circle
               ></el-button>

@@ -1,14 +1,23 @@
 <template>
   <div class="access-config">
     <div class="access-container-header">
-      <el-input 
-        v-model="keyword"
+      <el-input
+        v-model.trim="keyword"
+        size="small"
         class="search-keyword"
         placeholder="请输入关键字查找"
-      ></el-input>
+        @keyup.enter.native="getUserList()"
+      >
+        <i
+          slot="suffix"
+          class="el-icon-search el-input__icon"
+          @click="getUserList()"
+        ></i>
+      </el-input>
       <el-button
         size="small"
         type="primary"
+        @click="getUserList"
       >查询</el-button>
     </div>
     <div class="access-container-left">
@@ -22,6 +31,8 @@
 
 <script>
 import SystemList from './components/system-list'
+import API from './api'
+import qs from 'qs'
 
 export default {
   name: 'access-config',
@@ -31,6 +42,27 @@ export default {
   data() {
     return {
       keyword: ''
+    }
+  },
+  methods: {
+    async getUserList() {
+      const params = {
+        pageNo: 1,
+        pageSize: 20,
+        sortField: "id",
+        sort: "DESC",
+        keyword: ""
+      }
+      try {
+        const result = await API.getUserList(qs.stringify(params));
+        const {code, data} = result;
+        if(200 !== code) { return }
+        const developer = data.filter(item => item.user_department === "研发部");
+      }catch(err) {
+        console.log(err);
+      }finally {
+
+      }
     }
   }
 }
@@ -62,7 +94,7 @@ export default {
     box-sizing: border-box;
     margin-left: 256px;
     width: calc(100% - 256px);
-    height: calc(100vh - 224.4px);
+    height: calc(100vh - 225px);
     background-color: #fff;
     border-radius: 4px;
     overflow-y: auto;

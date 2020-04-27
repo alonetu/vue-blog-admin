@@ -1,12 +1,14 @@
 <template>
   <div class="system-list">
     <el-tree
-      :data="data"
-      show-checkbox
-      node-key="id"
-      :default-expanded-keys="[2, 3]"
-      :default-checked-keys="[5]"
+      ref="tree"
+      :data="treeData"
+      :default-expanded-keys="defaultExpand"
+      :default-checked-keys="defaultCheck"
       :props="defaultProps"
+      node-key="id"
+      show-checkbox
+      @check="getCheck"
     ></el-tree>
   </div>
 </template>
@@ -18,11 +20,22 @@ export default {
   name: "system-list",
   data() {
     return {
-      data: treeData,
+      treeData,
       defaultProps: {
         children: "children",
         label: "label"
-      }
+      },
+      defaultExpand: [100],
+      defaultCheck: [100]
+    }
+  },
+  created() {
+    this.getCheck();
+  },
+  methods: {
+    getCheck(obj, objInfo) {
+      if(!objInfo) { return }
+      const {checkedNodes} = objInfo;
     }
   }
 }
