@@ -20,11 +20,20 @@
         @click="getUserList"
       >查询</el-button>
     </div>
-    <div class="access-container-left">
+    <div class="access-container-left" v-show="isShowSidebar">
       <department-list/>
     </div>
-    <div class="access-container-right">
-      
+    <div class="access-container-right" :style="{'width': containerWidth, 'margin-left': marginLeft}">
+      <i
+        class="el-icon-s-fold sidebar-icon"
+        v-show="isShowSidebar"
+        @click="showSidebar"
+      ></i>
+      <i
+        class="el-icon-s-unfold sidebar-icon"
+        v-show="!isShowSidebar"
+        @click="showSidebar"
+      ></i>
     </div>
   </div>
 </template>
@@ -41,7 +50,10 @@ export default {
   },
   data() {
     return {
-      keyword: ''
+      keyword: '',
+      isShowSidebar: true,
+      containerWidth: 'calc(100% - 256px)',
+      marginLeft: '256px'
     }
   },
   methods: {
@@ -63,6 +75,11 @@ export default {
       }finally {
 
       }
+    },
+    showSidebar() {
+      this.isShowSidebar = !this.isShowSidebar;
+      this.containerWidth = this.isShowSidebar? 'calc(100% - 256px)': '100%';
+      this.marginLeft = this.isShowSidebar? '256px': '0';
     }
   }
 }
@@ -98,6 +115,12 @@ export default {
     background-color: #fff;
     border-radius: 4px;
     overflow-y: auto;
+    // transition: width .5s linear;
+    // transition: margin-left .5s linear;
+    .sidebar-icon {
+      cursor: pointer;
+      font-size: 18px;
+    }
   }
 }
 </style>

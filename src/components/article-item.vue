@@ -16,8 +16,8 @@
   height: 120px;
   width: calc(100% - 36px);
   position: relative;
-  border: 2px solid #9fbaa8;
+  border: 2px solid #f0f0f0;
   padding: 16px 16px 8px 16px;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 </style>
