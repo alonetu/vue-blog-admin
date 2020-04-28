@@ -21,7 +21,7 @@
       >查询</el-button>
     </div>
     <div class="access-container-left">
-      <system-list/>
+      <department-list/>
     </div>
     <div class="access-container-right">
       
@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import SystemList from './components/system-list'
+import DepartmentList from './components/department-list'
 import API from './api'
 import qs from 'qs'
 
 export default {
   name: 'access-config',
   components: {
-    SystemList
+    DepartmentList
   },
   data() {
     return {

@@ -1,0 +1,27 @@
+.article-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.article-intro {
+  font-size: 10px;
+  color: #c0c4cc;
+  margin-bottom: 24px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.article-author {
+  font-size: 12px;
+  margin-right: 16px;
+}
+
+.article-update-time {
+  font-size: 12px;
+}

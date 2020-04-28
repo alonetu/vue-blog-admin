@@ -1,5 +1,5 @@
 <template>
-  <div class="system-list">
+  <div class="department-list">
     <el-tree
       ref="tree"
       :data="treeData"
@@ -17,7 +17,7 @@
 import {treeData} from '../data'
 
 export default {
-  name: "system-list",
+  name: "department-list",
   data() {
     return {
       treeData,
