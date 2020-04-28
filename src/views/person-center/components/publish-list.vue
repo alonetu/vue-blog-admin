@@ -5,6 +5,28 @@
       <div slot="article-intro" class="article-intro">文章简介</div>
       <span slot="article-author" class="article-author">文章作者</span>
       <span slot="article-update-time" class="article-update-time">最后更新时间</span>
+      <el-button 
+        slot="article-btn-first"
+        class="article-btn-first"
+        icon="el-icon-view"
+        size="small"
+        circle
+      ></el-button>
+      <el-button 
+        slot="article-btn-second"
+        class="article-btn-second"
+        icon="el-icon-edit"
+        size="small"
+        circle
+      ></el-button>
+      <el-button 
+        slot="article-btn-thirdly"
+        class="article-btn-thirdly"
+        icon="el-icon-delete"
+        size="small"
+        type="danger"
+        circle
+      ></el-button>
     </article-item>
   </div>
 </template>

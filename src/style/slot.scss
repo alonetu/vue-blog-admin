@@ -1,7 +1,7 @@
 .article-name {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   cursor: pointer;
   overflow: hidden;
   text-overflow:ellipsis;
@@ -9,19 +9,40 @@
 }
 
 .article-intro {
-  font-size: 10px;
+  font-size: 12px;
   color: #c0c4cc;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
 }
 
 .article-author {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 16px;
 }
 
 .article-update-time {
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.article-btn-first {
+  position: absolute;
+  right: 92px;
+  font-size: 14px;
+  margin-top: -6px;
+}
+
+.article-btn-second {
+  position: absolute;
+  right: 50px;
+  font-size: 14px;
+  margin-top: -6px;
+}
+
+.article-btn-thirdly {
+  position: absolute;
+  right: 8px;
+  font-size: 14px;
+  margin-top: -6px;
 }
