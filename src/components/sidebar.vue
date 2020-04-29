@@ -85,7 +85,17 @@ export default {
           path: '/home-page'
         },
         {
-          icon: 'el-icon-user',
+          icon: 'el-icon-edit-outline',
+          label: '写博客',
+          path: '/write-blog'
+        },
+        {
+          icon: 'el-icon-search',
+          label: '查询博客',
+          path: '/search-blog'
+        },
+        {
+          icon: 'el-icon-setting',
           label: '用户管理',
           path: '/user-manage'
         },
@@ -95,7 +105,7 @@ export default {
           path: '/access-config'
         },
         {
-          icon: 'el-icon-watch',
+          icon: 'el-icon-user',
           label: '个人中心',
           path: '/person-center'
         }
