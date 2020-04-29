@@ -4,23 +4,27 @@
       <person-info/>
     </div>
     <div class="person-container-right">
-      <el-tabs v-model="activePage" @tab-click="handleClick" :lazy=true>
-        <el-tab-pane label="已发布的博客" name="showPublish">
-          <transition name="breadcrumb">
-            <publish-list v-if="showPublish"/>
-          </transition>
+      <el-tabs 
+        v-model="activePage" 
+        @tab-click="handleClick"
+      >
+        <el-tab-pane label="发布的博客" name="showPublish">
+          <publish-list/>
         </el-tab-pane>
         <el-tab-pane label="收藏的博客" name="showCollect">
-          <transition name="breadcrumb">
-            <collect-list v-if="showCollect"/>
-          </transition>
-        </el-tab-pane>
-        <el-tab-pane label="赞过的博客" name="showPraise">
-          <transition name="breadcrumb">
-            <praise-list v-if="showPraise"/>
-          </transition>
+          <collect-list/>
         </el-tab-pane>
       </el-tabs>
+      <el-button
+        type="primary"
+        size="small"
+        slot="label"
+        v-show="activePage=='showCollect'"
+        style="position: absolute;top: 0; right: 0;"
+      >
+        <i class="el-icon-plus"></i>
+        <span>新建文件夹</span>
+      </el-button>
     </div>
   </div>
 </template>
@@ -29,22 +33,17 @@
 import PersonInfo from './components/person-info'
 import PublishList from './components/publish-list'
 import CollectList from './components/collect-list'
-import PraiseList from './components/praise-list'
 
 export default {
   name: 'person-center',
   components: {
     PersonInfo,
     PublishList,
-    CollectList,
-    PraiseList
+    CollectList
   },
   data() {
     return {
-      activePage: 'showPublish',
-      showPublish: true,
-      showCollect: false,
-      showPraise: false
+      activePage: 'showPublish'
     }
   },
   methods: {
@@ -63,6 +62,7 @@ export default {
     width: 240px;
   }
   .person-container-right {
+    position: relative;
     flex: 1;
   }
 }

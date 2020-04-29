@@ -98,9 +98,9 @@ export default {
     margin-left: 5px;
   }
   .active-tag {
-    background-color: #42b983;
+    background-color: #409EFF;
     color: #fff;
-    border-color: #42b983;
+    border-color: #409EFF;
   }
   .el-tag--plain .el-tag__close {
     color: #fff;

@@ -55,3 +55,22 @@
 .el-divider--horizontal {
   margin: 8px 0;
 }
+
+// 全局修改按钮focus状态
+.el-button:focus {
+  color: #606266;
+  background: #fff;
+  border: 1px solid #dcdfe6;
+}
+
+.el-button--danger:focus {
+  color: #fff;
+  background-color: #f56c6c;
+  border-color: #f56c6c;
+}
+
+.el-button--primary:focus {
+  color: #fff;
+  background-color: #409eff;
+  border-color: #409eff;
+}
