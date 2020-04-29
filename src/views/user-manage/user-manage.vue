@@ -25,7 +25,7 @@
       <div class="user-container-table">
         <el-table
           :data="tableData"
-          :loading="tableLoading"
+          v-loading="tableLoading"
           style="width: 100%"
           @sort-change="changeTableSort"
         >
@@ -220,7 +220,7 @@ export default {
       } catch (err) {
         console.log(err);
       } finally {
-        this.loading = false;
+        this.tableLoading = false;
       }
     },
     /**
