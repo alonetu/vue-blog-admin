@@ -61,6 +61,7 @@
 import DatePicker from '@/components/date-picker'
 import BlogItem from './components/blog-item'
 import {blogContent} from './data'
+import API from './api'
 
 export default {
   name: 'search-blog',
@@ -93,6 +94,22 @@ export default {
       keyword: '',
       blogContent
     }
+  },
+  created() {
+    this.getArticle();
+  },
+  methods: {
+    async getArticle() {
+      try {
+        const {code, data} = await API.getArticle();
+        if(200 !== code) { return }
+        this.blogContent = data;
+      }catch(err) {
+        console.log(err)
+      }finally {
+
+      }
+    }
   }
 }
 </script>
@@ -108,7 +125,6 @@ export default {
     .search-header-datepicker {
       display: flex;
       justify-content: space-between;
-      // margin-bottom: 8px;
     }
     .search-header-select {
       width: 220px;
