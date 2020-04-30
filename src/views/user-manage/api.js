@@ -11,7 +11,7 @@ export default {
 
   // 根据用户名获取用户信息
   async getUserByUserName(params) {
-    return await Server.axios('GET', baseURL, `/getuserbyusername?user_name=${params.user_name}`)
+    return await Server.axios('GET', baseURL, `/getuserbyusername?name=${params.name}`)
   },
 
   // 根据id获取用户

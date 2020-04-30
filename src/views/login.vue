@@ -60,9 +60,9 @@ export default {
     };
   },
   methods: {
-    async handleLogin(user_name) {
+    async handleLogin(name) {
       const baseURL = process.env.NODE_ENV === 'development'?'/blog': '127.0.0.1:3000';
-      return await Server.axios('GET', baseURL, `/getuserbyusername?user_name=${user_name}`)
+      return await Server.axios('GET', baseURL, `/getuserbyusername?name=${name}`)
     },
     submitForm() {
       this.$refs['loginForm'].validate(valid => {
@@ -71,7 +71,7 @@ export default {
               .then(res => {
                 const {code, data} = res;
                 const user = data[0];
-                if(code !== 200 || user.user_password !== this.loginForm.password) {
+                if(code !== 200 || user.password !== this.loginForm.password) {
                   return Notification.error({
                     message: '用户名或密码错误',
                     showClose: false,
@@ -85,7 +85,7 @@ export default {
                  * 将vuex中的信息写入session
                  * 跳转到home-page页面
                  */
-                const userInfo = {name: user.user_cname, id: user.user_name};
+                const userInfo = {name: user.cname, id: user.name};
                 const defaultPage = "/home-page";
                 this.$store.commit('login', userInfo);
                 this.$router.push({ path: defaultPage });

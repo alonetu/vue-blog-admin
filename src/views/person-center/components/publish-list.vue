@@ -5,7 +5,7 @@
         <div slot="article-name" class="article-name">{{item.articleName}}</div>
         <div slot="article-intro" class="article-intro">{{item.articleInfo}}</div>
         <span slot="article-author" class="article-author">auth: {{item.articleAuth}}</span>
-        <span slot="article-update-time" class="article-update-time">最后更新时间: {{item.lastUpdateTime}}</span>
+        <span slot="article-update-time" class="article-update-time">lastUpdateTime: {{item.lastUpdateTime}}</span>
         <el-button 
           slot="article-btn-first"
           class="article-btn-first"

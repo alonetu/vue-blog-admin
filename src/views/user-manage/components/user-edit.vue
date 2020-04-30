@@ -9,7 +9,7 @@
     >
       <el-form-item
         label="姓名"
-        prop="user_cname"
+        prop="cname"
         :rules="[
           { required: true, message: '姓名不能为空', trigger: 'blur' },
           { min: 2, max: 10, message: '姓名长度2-10位', trigger: 'blur' }
@@ -17,13 +17,13 @@
       >
         <el-input 
           type="text" 
-          v-model="editData.user_cname" 
+          v-model="editData.cname" 
           autocomplete="off"
         ></el-input>
       </el-form-item>
       <el-form-item
         label="账号"
-        prop="user_name"
+        prop="name"
         :rules="[
           { required: true, message: '账号不能为空', trigger: 'blur' },
           { min: 3, max: 15, message: '账号长度3-10位', trigger: 'blur' }
@@ -31,13 +31,13 @@
       >
         <el-input 
           type="text" 
-          v-model="editData.user_name" 
+          v-model="editData.name" 
           autocomplete="off"
         ></el-input>
       </el-form-item>
       <el-form-item
         label="密码"
-        prop="user_password"
+        prop="password"
         :rules="[
           { required: true, message: '密码不能为空', trigger: 'blur' },
           { min: 3, message: '密码长度最低3位', trigger: 'blur' }
@@ -45,28 +45,28 @@
       >
         <el-input 
           type="password" 
-          v-model="editData.user_password" 
+          v-model="editData.password" 
           autocomplete="off"
         ></el-input>
       </el-form-item>
       <el-form-item
         label="部门"
-        prop="user_department"
+        prop="department"
         :rules="[
           { required: true, message: '部门必填项', trigger: 'blur' },
           { min: 2, message: '部门名称最低2位', trigger: 'blur' }
         ]"
       > 
-        <el-input v-model.number="editData.user_department"></el-input>
+        <el-input v-model.number="editData.department"></el-input>
       </el-form-item>
       <el-form-item
         label="职位"
-        prop="user_role"
+        prop="role"
         :rules="[
           { required: true, message: '职位必填项', trigger: 'blur' }
         ]"
       >
-        <el-input v-model.number="editData.user_role"></el-input>
+        <el-input v-model.number="editData.role"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('editData', editData)">提交</el-button>
@@ -113,23 +113,23 @@ export default {
     },
     /**
      * 添加用户
-     * @param {string} user_cname 用户中文名称
-     * @param {string} user_name 用户账号
-     * @param {string} user_password 用户密码
-     * @param {string} user_department 用户所在部门
-     * @param {string} user_role 用户角色
-     * @param {string} create_time 创建时间
-     * @param {string} update_time 更新时间
+     * @param {string} cname 用户中文名称
+     * @param {string} name 用户账号
+     * @param {string} password 用户密码
+     * @param {string} department 用户所在部门
+     * @param {string} role 用户角色
+     * @param {string} createTime 创建时间
+     * @param {string} updateTime 更新时间
      */
     async addUser(data) {
       let params = {
-        user_cname: data.user_cname,
-        user_name: data.user_name,
-        user_password: data.user_password,
-        user_department: data.user_department,
-        user_role: data.user_role,
-        create_time: this.formatTime(new Date()),
-        update_time: ''
+        cname: data.cname,
+        name: data.name,
+        password: data.password,
+        department: data.department,
+        role: data.role,
+        createTime: this.formatTime(new Date()),
+        updateTime: ''
       }
       try {
         let result = await API.addUser(params);
@@ -148,24 +148,24 @@ export default {
     /**
      * 更新用户
      * @param {number} id 用户id
-     * @param {string} user_cname 用户中文名称
-     * @param {string} user_name 用户账号
-     * @param {string} user_password 用户密码
-     * @param {string} user_department 用户所在部门
-     * @param {string} user_role 用户角色
-     * @param {string} create_time 创建时间
-     * @param {string} update_time 更新时间
+     * @param {string} cname 用户中文名称
+     * @param {string} name 用户账号
+     * @param {string} password 用户密码
+     * @param {string} department 用户所在部门
+     * @param {string} role 用户角色
+     * @param {string} createTime 创建时间
+     * @param {string} updateTime 更新时间
      */
     async updateUser(data) {
       let params = {
         id: data.id,
-        user_cname: data.user_cname,
-        user_name: data.user_name,
-        user_password: data.user_password,
-        user_department: data.user_department,
-        user_role: data.user_role,
-        create_time: data.create_time,
-        update_time: this.formatTime(new Date())
+        cname: data.cname,
+        name: data.name,
+        password: data.password,
+        department: data.department,
+        role: data.role,
+        createTime: data.createTime,
+        updateTime: this.formatTime(new Date())
       }
       try {
         let result = await API.updateUser(params);

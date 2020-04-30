@@ -98,12 +98,15 @@ export default {
     margin-left: 5px;
   }
   .active-tag {
-    background-color: #409EFF;
+    background-color: #409eff;
     color: #fff;
-    border-color: #409EFF;
+    border-color: #409eff;
   }
   .el-tag--plain .el-tag__close {
     color: #fff;
+    &:hover {
+      background-color: #363636;
+    }
   }
 }
 </style>

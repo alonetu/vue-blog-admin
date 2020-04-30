@@ -35,73 +35,73 @@
             </template>
           </el-table-column>
           <el-table-column 
-            prop="user_cname" 
+            prop="cname" 
             label="姓名"
           >
           <template slot-scope="scope">
-              <span v-html="setHeighLight(scope.row.user_cname)"></span>
+              <span v-html="setHeighLight(scope.row.cname)"></span>
             </template>
           </el-table-column>
           <el-table-column 
-            prop="user_name" 
+            prop="name" 
             label="账号" 
             align="left" 
             sortable="custom"
           >
             <template slot-scope="scope">
-              <span v-html="setHeighLight(scope.row.user_name)"></span>
+              <span v-html="setHeighLight(scope.row.name)"></span>
             </template>
           </el-table-column>
           <el-table-column 
-            prop="user_department" 
+            prop="department" 
             label="部门" 
             align="left"
           >
             <template slot-scope="scope">
-              <span v-html="setHeighLight(scope.row.user_department)"></span>
+              <span v-html="setHeighLight(scope.row.department)"></span>
             </template>
           </el-table-column>
           <el-table-column 
-            prop="user_role" 
+            prop="role" 
             label="职位" 
             align="left" 
             width="180"
           >
             <template slot-scope="scope">
-              <span v-html="setHeighLight(scope.row.user_role)"></span>
+              <span v-html="setHeighLight(scope.row.role)"></span>
             </template>
           </el-table-column>
           <el-table-column
             sortable="custom"
-            prop="article_count"
+            prop="count"
             label="博客总数"
             align="left"
             width="140"
           >
             <template slot-scope="scope">
-              <span v-html="setHeighLight(scope.row.article_count)"></span>
+              <span v-html="setHeighLight(scope.row.count)"></span>
             </template>
           </el-table-column>
           <el-table-column 
             sortable="custom"
-            prop="create_time" 
+            prop="createTime" 
             label="创建时间" 
             align="left" 
             width="200"
           >
             <template slot-scope="scope">
-              <span v-html="setHeighLight(scope.row.create_time)"></span>
+              <span v-html="setHeighLight(scope.row.createTime)"></span>
             </template>
           </el-table-column>
           <el-table-column 
             sortable="custom"
-            prop="update_time" 
+            prop="updateTime" 
             label="更新时间" 
             align="left" 
             width="200"
           >
             <template slot-scope="scope">
-              <span v-html="setHeighLight(scope.row.update_time)"></span>
+              <span v-html="setHeighLight(scope.row.updateTime)"></span>
             </template>
           </el-table-column>
           <el-table-column 

@@ -1,20 +1,20 @@
 <template>
   <div class="user-detail">
     <el-form label-position="left">
-      <el-form-item label="姓名:" prop="user_cname">
-        <span v-html="userDetail.user_cname"></span>
+      <el-form-item label="姓名:" prop="cname">
+        <span v-html="userDetail.cname"></span>
       </el-form-item>
-      <el-form-item label="账号:" prop="user_name">
-        <span v-html="userDetail.user_name"></span>
+      <el-form-item label="账号:" prop="name">
+        <span v-html="userDetail.name"></span>
       </el-form-item>
-      <el-form-item label="密码:" prop="user_password">
-        <span v-html="userDetail.user_password"></span>
+      <el-form-item label="密码:" prop="password">
+        <span v-html="userDetail.password"></span>
       </el-form-item>
-      <el-form-item label="部门:" prop="user_department">
-        <span v-html="userDetail.user_department"></span>
+      <el-form-item label="部门:" prop="department">
+        <span v-html="userDetail.department"></span>
       </el-form-item>
-      <el-form-item label="职位:" prop="user_role">
-        <span v-html="userDetail.user_role"></span>
+      <el-form-item label="职位:" prop="role">
+        <span v-html="userDetail.role"></span>
       </el-form-item>
       <el-form-item label="博客总数:" prop="article_count">
         <span v-html="userDetail.article_count"></span>
