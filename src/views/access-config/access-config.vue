@@ -87,6 +87,7 @@ export default {
 
 <style lang="scss">
 .access-config {
+  overflow-x: hidden;
   .access-container-header {
     padding: 24px 16px;
     margin-bottom: 16px;
@@ -115,8 +116,8 @@ export default {
     background-color: #fff;
     border-radius: 4px;
     overflow-y: auto;
-    // transition: width .5s linear;
-    // transition: margin-left .5s linear;
+    transition: width .2s linear;
+    transition: margin-left .2s linear;
     .sidebar-icon {
       cursor: pointer;
       font-size: 18px;

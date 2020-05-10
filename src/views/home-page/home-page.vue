@@ -37,3 +37,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.home-page {
+  overflow-x: hidden;
+}
+</style>

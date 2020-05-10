@@ -3,7 +3,8 @@
     v-model="dateTime"
     type="datetimerange"
     size="samll"
-    range-separator="至"
+    format="yyyy-MM-dd HH:mm:ss"
+    range-separator="-"
     start-placeholder="开始日期"
     end-placeholder="结束日期"
   ></el-date-picker>
@@ -13,7 +14,7 @@
 export default {
   data() {
     return {
-      dateTime: []
+      dateTime: [Date.parse(new Date()), Date.parse(new Date()) + 5 * 1000]
     }
   }
 }

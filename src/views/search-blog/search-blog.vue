@@ -6,17 +6,20 @@
           <el-button
             type="text"
             size="samll"
+            @click="showSaveDialog"
           >保存</el-button>
           <el-button
             type="text"
             size="samll"
+            @click="updateSaveCondition"
           >更新</el-button>
           <el-button
             type="text"
             size="samll"
+            @click="showSaveHistory"
           >打开</el-button>
         </div>
-        <date-picker/>
+        <date-picker ref="dataPicker"/>
       </div>
       <el-select 
         v-model="activeSelect"
@@ -36,12 +39,14 @@
       <el-input 
         v-model.trim="keyword"
         size="small"
+        @keyup.enter.native="searchBlog"
         class="search-header-input"
         placeholder="请输入关键字搜索"
       >
         <i
           class="el-icon-search el-input__icon" 
           slot="suffix"
+          @click="searchBlog"
         ></i>
       </el-input>
       <el-button
@@ -54,20 +59,33 @@
         <blog-item :key="`${item}${index}`" :blogContent="item"/>
       </template>
     </div>
+    <save-name 
+      :visible="showSaveName" 
+      :oncancel="hideSaveName"
+    />
+    <save-condition 
+      :visible="showSaveCondition" 
+      :oncancel="hideSaveCondition"
+    />
   </div>
 </template>
 
 <script>
 import DatePicker from '@/components/date-picker'
 import BlogItem from './components/blog-item'
+import SaveName from './components/save-name'
+import SaveCondition from './components/save-condition'
 import {blogContent} from './data'
 import API from './api'
+import moment from 'moment'
 
 export default {
   name: 'search-blog',
   components: {
     DatePicker,
-    BlogItem
+    BlogItem,
+    SaveName,
+    SaveCondition
   },
   data() {
     return {
@@ -92,7 +110,9 @@ export default {
         }],
       activeSelect: '全部',
       keyword: '',
-      blogContent
+      blogContent,
+      showSaveName: false,
+      showSaveCondition: false
     }
   },
   created() {
@@ -109,6 +129,20 @@ export default {
       }finally {
 
       }
+    },
+    searchBlog() {},
+    showSaveDialog() {
+      this.showSaveName = true;
+    },
+    hideSaveName() {
+      this.showSaveName = false;
+    },
+    updateSaveCondition() {},
+    showSaveHistory() {
+      this.showSaveCondition = true;
+    },
+    hideSaveCondition() {
+      this.showSaveCondition = false;
     }
   }
 }
@@ -136,8 +170,8 @@ export default {
   }
   .search-container {
     margin-top: 16px;
-    height: calc(100% - 120px);
-    overflow: auto;
+    min-height: 100%;
+    overflow: hidden;
     width: 100%;
     padding: 16px;
     box-sizing: border-box;

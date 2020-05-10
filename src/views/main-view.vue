@@ -56,7 +56,6 @@ export default {
   display: flex;
   background: #eff5fd;
   box-sizing: border-box;
-  overflow: auto;
   .side-bar {
     height: 100%;
     transition: width .2s linear;
