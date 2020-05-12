@@ -45,6 +45,7 @@
       >
         <i
           class="el-icon-search el-input__icon" 
+          style="cursor:pointer;"
           slot="suffix"
           @click="searchBlog"
         ></i>
@@ -93,27 +94,24 @@ export default {
   data() {
     return {
       department: [{
-          value: '选项0',
+          value: '0',
           label: '全部'
         },{
-          value: '选项1',
-          label: '黄金糕'
+          value: '1',
+          label: '研发部'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: '2',
+          label: '设计部'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: '3',
+          label: '测试部'
         }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '4',
+          label: '人事部'
         }],
       activeSelect: '全部',
       keyword: '',
-      blogContent,
+      blogContent: [],
       showSaveConditionName: false,
       showSaveConditionContent: false,
       startTime: '',
@@ -129,11 +127,19 @@ export default {
         const {code, data} = await API.getArticle();
         if(200 !== code) { return }
         this.blogContent = data;
+        this.$notify.success({
+          message: '博客查询成功',
+          duration: 1200,
+          showClose: false
+        })
       }catch(err) {
+        this.$notify.error({
+          message: err,
+          duration: 1200,
+          showClose: false
+        })
         console.log(err)
-      }finally {
-
-      }
+      }finally {}
     },
     searchBlog() {},
     showSaveName() {
@@ -178,6 +184,7 @@ export default {
   }
   .search-container {
     margin-top: 16px;
+    height: calc(100% - 120px);
     max-height: calc(100% - 120px);
     overflow: auto;
     width: 100%;

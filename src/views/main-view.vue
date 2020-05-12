@@ -12,10 +12,9 @@
       </div>
       <!-- 内容显示区 路由跳转 -->
       <div class="container-router">
-        <!-- <keep-alive>
-          
-        </keep-alive> -->
-        <router-view/>
+        <transition name="slide-fade">
+          <router-view/>
+        </transition>
       </div>
     </div>
   </div>

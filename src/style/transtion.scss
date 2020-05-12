@@ -25,5 +25,18 @@
 }
 .fade-enter,
 .fade-leave-to {
-  opacity: .8;
+  opacity: 0;
+}
+
+/* slide-fade */
+.slide-fade-enter-active {
+  transition: all .5s;
+}
+.slide-fade-leave-active {
+  transition: all .5s;
+}
+.slide-fade-enter, 
+.slide-fade-leave-to{
+  transform: translateX(20px);
+  opacity: 0;
 }

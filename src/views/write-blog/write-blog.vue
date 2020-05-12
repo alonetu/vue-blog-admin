@@ -12,7 +12,7 @@
       <el-input
         v-model="intro"
         type="text"
-        maxlength="30"
+        maxlength="50"
         show-word-limit
         placeholder="请输入博客简介"
         class="blog-head-input"
@@ -53,7 +53,7 @@ export default {
   .write-blog-head {
     position: relative;
     .blog-head-input {
-      margin-bottom: 8px;
+      margin-bottom: 16px;
       width: calc(100% - 240px);
     }
     .blog-head-btn {
