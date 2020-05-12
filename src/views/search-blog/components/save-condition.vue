@@ -1,7 +1,7 @@
 <template>
   <el-dialog 
     title="保存条件" 
-    width="50%" 
+    width="50%"
     :visible.sync="visible"
     :before-close="oncancel"
   >
@@ -25,17 +25,23 @@
         <template slot-scope="scope">
           <el-button
             size="small"
+            style="margin-right:10px;"
             circle
             icon="el-icon-search"
             @click="searchCondition(scope.row)"
           ></el-button>
-          <el-button
-            size="small"
-            type="danger"
-            circle
-            icon="el-icon-delete"
-            @click="deleteCondition(scope.row)"
-          ></el-button>
+          <el-popconfirm
+            title="确认删除吗?"
+            @onConfirm="confirmDel(scope.row)"
+          >
+            <el-button
+              size="small"
+              type="danger"
+              slot="reference"
+              circle
+              icon="el-icon-delete"
+            ></el-button>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -66,8 +72,13 @@ export default {
     }
   },
   methods: {
-    searchCondition(row) {},
+    searchCondition(row) {
+      console.log(row);
+    },
     deleteCondition(row) {
+      console.log(row);
+    },
+    confirmDel(row) {
       console.log(row);
     }
   }

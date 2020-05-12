@@ -18,17 +18,20 @@ export default {
 }
 
 /** 隐藏滚动条 */
-// ::-webkit-scrollbar {
-//   width: 0px;
-//   height: 0px;
-// }
+::-webkit-scrollbar {
+  width: 4px;
+  // height: 0px;
+}
 
-// ::-webkit-scrollbar-thumb {
-//   background: transparent;
-//   border-radius: 5px;
-// }
+/** 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background: #888888;
+  border-radius: 10px;
+  margin-left: 8px;
+}
 
-// ::-webkit-scrollbar-track {
-//   background: transparent;
-// }
+/** 滚动条轨道 */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 </style>

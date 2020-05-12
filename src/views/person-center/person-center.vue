@@ -62,6 +62,7 @@ export default {
     width: 240px;
   }
   .person-container-right {
+    overflow: auto;
     position: relative;
     flex: 1;
   }

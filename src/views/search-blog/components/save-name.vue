@@ -13,7 +13,7 @@
     <div slot="footer" class="dialog-footer">
       <el-button 
         size="small"
-        @click="saveNameVisible = false"
+        @click="cancelSave"
       >取 消</el-button>
       <el-button 
         type="primary" 
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   data() {
     return {
@@ -39,17 +41,32 @@ export default {
     oncancel: {
       type: Function,
       default: () => {}
+    },
+    keyword: {
+      type: String,
+      default: ''
+    },
+    startTime: {
+      type: String,
+      default: ''
+    },
+    endTime: {
+      type: String,
+      default: ''
     }
   },
   methods: {
+    cancelSave() {
+      this.saveName = '';
+      this.oncancel();
+    },
     saveSearchName() {
-      const startTime = moment(this.$refs.dataPicker.dateTime[0]).format("YYYY-MM-DD HH:mm:ss");
-      const endTime = moment(this.$refs.dataPicker.dateTime[1]).format("YYYY-MM-DD HH:mm:ss");
-      const params = {
-        name: '',
-        keyword: '',
-        dateTime: [startTime, endTime]
+      let params = {
+        name: this.saveName,
+        keyword: this.keyword,
+        dateTime: [this.startTime, this.endTime]
       }
+      this.cancelSave();
     }
   }
 }

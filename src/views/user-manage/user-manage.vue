@@ -361,6 +361,7 @@ export default {
 <style lang="scss">
 .user-manage {
   padding: 16px;
+  overflow: auto;
   .user-container-header {
     width: 100%;
     margin-bottom: 24px;

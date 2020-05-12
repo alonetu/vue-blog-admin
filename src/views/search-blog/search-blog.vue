@@ -6,7 +6,7 @@
           <el-button
             type="text"
             size="samll"
-            @click="showSaveDialog"
+            @click="showSaveName"
           >保存</el-button>
           <el-button
             type="text"
@@ -16,10 +16,10 @@
           <el-button
             type="text"
             size="samll"
-            @click="showSaveHistory"
+            @click="showSaveCondition"
           >打开</el-button>
         </div>
-        <date-picker ref="dataPicker"/>
+        <date-picker ref="datePicker" />
       </div>
       <el-select 
         v-model="activeSelect"
@@ -60,11 +60,14 @@
       </template>
     </div>
     <save-name 
-      :visible="showSaveName" 
+      :visible="showSaveConditionName" 
       :oncancel="hideSaveName"
+      :keyword="keyword"
+      :startTime="startTime"
+      :endTime="endTime"
     />
     <save-condition 
-      :visible="showSaveCondition" 
+      :visible="showSaveConditionContent" 
       :oncancel="hideSaveCondition"
     />
   </div>
@@ -111,8 +114,10 @@ export default {
       activeSelect: '全部',
       keyword: '',
       blogContent,
-      showSaveName: false,
-      showSaveCondition: false
+      showSaveConditionName: false,
+      showSaveConditionContent: false,
+      startTime: '',
+      endTime: ''
     }
   },
   created() {
@@ -131,18 +136,20 @@ export default {
       }
     },
     searchBlog() {},
-    showSaveDialog() {
-      this.showSaveName = true;
+    showSaveName() {
+      this.showSaveConditionName = true;
+      this.startTime = moment(this.$refs.datePicker.dateTime[0]).format("YYYY-MM-DD HH:mm:ss");
+      this.endTime = moment(this.$refs.datePicker.dateTime[1]).format("YYYY-MM-DD HH:mm:ss");
     },
     hideSaveName() {
-      this.showSaveName = false;
+      this.showSaveConditionName = false;
     },
     updateSaveCondition() {},
-    showSaveHistory() {
-      this.showSaveCondition = true;
+    showSaveCondition() {
+      this.showSaveConditionContent = true;
     },
     hideSaveCondition() {
-      this.showSaveCondition = false;
+      this.showSaveConditionContent = false;
     }
   }
 }
@@ -150,6 +157,7 @@ export default {
 
 <style lang="scss">
 .search-blog {
+  height: 100%;
   .search-header {
     height: 104px;
     width: 100%;
@@ -170,8 +178,8 @@ export default {
   }
   .search-container {
     margin-top: 16px;
-    min-height: 100%;
-    overflow: hidden;
+    max-height: calc(100% - 120px);
+    overflow: auto;
     width: 100%;
     padding: 16px;
     box-sizing: border-box;
