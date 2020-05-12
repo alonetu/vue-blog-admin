@@ -1,10 +1,10 @@
 <template>
   <div class="blog-item">
-    <div class="blog-item-header">
+    <div class="blog-item-header" @click="inBlogDetail(blogContent.id)">
       {{ blogContent.title }}
     </div>
     <div class="blog-item-intro">
-      {{ blogContent.intro }}
+      简介：{{ blogContent.intro }}
     </div>
     <div class="blog-item-info">
       <span class="blog-item-info-auth">
@@ -31,6 +31,17 @@ export default {
     blogContent: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    /** 新窗口打开文章详情页 */
+    inBlogDetail(id) {
+      const params = { id: id };
+      let routeData = this.$router.resolve({
+        path: `/article-detail/${id}`,
+        query: params
+      });
+      window.open(routeData.location.path, "_blank");
     }
   }
 }

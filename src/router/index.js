@@ -8,6 +8,7 @@ const MainView = () => import('@/views/main-view')
 const HomePage = () => import('@/views/home-page/home-page')
 const WriteBlog = () => import('@/views/write-blog/write-blog')
 const SearchBlog = () => import('@/views/search-blog/search-blog')
+const ArticleDetail = () => import('@/views/article-detail/article-detail')
 const UserManage = () => import('@/views/user-manage/user-manage')
 const PersonCenter = () => import('@/views/person-center/person-center')
 const AccessConfig = () => import('@/views/access-config/access-config')
@@ -67,9 +68,15 @@ const router = new Router({
       ]
     },
     {
-      path: '*',
-      redirect: '/login'
-    }
+      path: '/article-detail/:id',
+      name: 'article-detail',
+      component: ArticleDetail,
+      meta: { title: '文章详情页' }
+    },
+    // {
+    //   path: '*',
+    //   redirect: '/login'
+    // }
   ]
 })
 router.beforeEach((to, from, next) => {
