@@ -20,7 +20,6 @@ export default {
 /** 隐藏滚动条 */
 ::-webkit-scrollbar {
   width: 4px;
-  // height: 0px;
 }
 
 /** 滚动条滑块 */

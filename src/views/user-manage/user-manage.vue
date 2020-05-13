@@ -29,11 +29,11 @@
           style="width: 100%"
           @sort-change="changeTableSort"
         >
-          <el-table-column type="expand">
+          <!-- <el-table-column type="expand">
             <template slot-scope="scope">
               <user-detail :userDetail="scope.row" />
             </template>
-          </el-table-column>
+          </el-table-column> -->
           <el-table-column 
             prop="cname" 
             label="姓名"

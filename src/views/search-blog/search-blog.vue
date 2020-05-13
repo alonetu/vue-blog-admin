@@ -11,11 +11,6 @@
           <el-button
             type="text"
             size="samll"
-            @click="updateSaveCondition"
-          >更新</el-button>
-          <el-button
-            type="text"
-            size="samll"
             @click="showSaveCondition"
           >打开</el-button>
         </div>
@@ -59,6 +54,11 @@
       <template v-for="(item, index) in blogContent">
         <blog-item :key="`${item}${index}`" :blogContent="item"/>
       </template>
+      <el-button
+        class="more-blog"
+        :loading="moreLoading"
+        @click="loadMore"
+      >查看更多</el-button>
     </div>
     <save-name 
       :visible="showSaveConditionName" 
@@ -115,7 +115,8 @@ export default {
       showSaveConditionName: false,
       showSaveConditionContent: false,
       startTime: '',
-      endTime: ''
+      endTime: '',
+      moreLoading: false
     }
   },
   created() {
@@ -150,12 +151,17 @@ export default {
     hideSaveName() {
       this.showSaveConditionName = false;
     },
-    updateSaveCondition() {},
     showSaveCondition() {
       this.showSaveConditionContent = true;
     },
     hideSaveCondition() {
       this.showSaveConditionContent = false;
+    },
+    loadMore() {
+      this.moreLoading = true;
+      setTimeout(() => {
+        this.moreLoading = false;
+      }, 1000);
     }
   }
 }
@@ -191,6 +197,16 @@ export default {
     padding: 16px;
     box-sizing: border-box;
     background-color: #fff;
+    .more-blog {
+      display: flex;
+      justify-content: center;
+      border-radius: 20px;
+      height: 32px;
+      width: 780px;
+      margin: 32px auto;
+      background-color: #888888;
+      color: #fff;
+    }
   }
 }
 </style>

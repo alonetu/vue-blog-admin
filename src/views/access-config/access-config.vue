@@ -23,17 +23,68 @@
     <div class="access-container-left" v-show="isShowSidebar">
       <department-list/>
     </div>
-    <div class="access-container-right" :style="{'width': containerWidth, 'margin-left': marginLeft}">
-      <i
-        class="el-icon-s-fold sidebar-icon"
-        v-show="isShowSidebar"
-        @click="showSidebar"
-      ></i>
-      <i
-        class="el-icon-s-unfold sidebar-icon"
-        v-show="!isShowSidebar"
-        @click="showSidebar"
-      ></i>
+    <div 
+      class="access-container-right" 
+      :style="{'width': containerWidth, 'margin-left': marginLeft}"
+    >
+      <div class="access-container-right-head">
+        <i
+          class="el-icon-s-fold sidebar-icon"
+          v-show="isShowSidebar"
+          @click="showSidebar"
+        ></i>
+        <i
+          class="el-icon-s-unfold sidebar-icon"
+          v-show="!isShowSidebar"
+          @click="showSidebar"
+        ></i>
+        <el-checkbox v-model="showDepartment" style="margin-left:120px;">部门</el-checkbox>
+        <el-checkbox v-model="showCreateTime">入职日期</el-checkbox>
+      </div>
+      <div class="access-container-right-content">
+        <el-table
+          :data="userList"
+        >
+          <el-table-column
+            prop="cname"
+            label="姓名"
+          ></el-table-column>
+          <el-table-column
+            prop="name"
+            label="账号"
+          ></el-table-column>
+          <el-table-column
+            prop="department"
+            label="部门"
+            v-if="showDepartment"
+          ></el-table-column>
+          <el-table-column
+            prop="role"
+            label="职位"
+          ></el-table-column>
+          <el-table-column
+            prop="createTime"
+            label="入职时间"
+            v-if="showCreateTime"
+          ></el-table-column>
+          <el-table-column
+            label="权限"
+            align="center"
+          >
+            <template slot-scope="scope">
+              <el-switch
+                style="display: block"
+                v-model="scope.row.access"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                active-text="管理员"
+                inactive-text="普通用户"
+              >
+              </el-switch>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +104,17 @@ export default {
       keyword: '',
       isShowSidebar: true,
       containerWidth: 'calc(100% - 256px)',
-      marginLeft: '256px'
+      marginLeft: '256px',
+      userList: [{
+        cname: 'admin',
+        name: 'admin',
+        department: '研发部',
+        role: '产品经理',
+        createTime: '2020-03-12',
+        access: true
+      }],
+      showDepartment: false,
+      showCreateTime: false
     }
   },
   methods: {
@@ -121,6 +182,9 @@ export default {
     .sidebar-icon {
       cursor: pointer;
       font-size: 18px;
+    }
+    .access-container-right-content {
+      margin-top: 16px;
     }
   }
 }

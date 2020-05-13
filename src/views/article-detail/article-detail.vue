@@ -4,7 +4,7 @@
       <div class="article-title">{{article.title}}</div>
       <div class="article-intro">简介：{{article.intro}}</div>
       <div class="article-info">
-        <span class="article-info-auth">auth: {{article.auth}}</span>
+        <span class="article-info-auth">author: {{article.auth}}</span>
         <span class="article-info-time">updateTime: {{updateTime}}</span>
       </div>
       <div class="article-content">{{article.content}}</div>
