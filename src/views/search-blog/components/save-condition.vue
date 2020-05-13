@@ -7,15 +7,34 @@
   >
     <el-table
       :data="conditionList"
+      :loading="tableLoading"
+      max-height="280"
     >
       <el-table-column 
-        property="name" 
+        property="saveName" 
         label="名称" 
         width="150"
       ></el-table-column>
+      <el-table-column
+        label="部门"
+      >
+        <template slot-scope="scope">
+          <span>{{ departmentMap[scope.row.department] }}</span>
+        </template>
+      </el-table-column>
       <el-table-column 
-        property="condition" 
-        label="条件"
+        property="keyword" 
+        label="关键字"
+        show-overflow-tooltip
+      >
+        <template slot-scope="scope">
+          <span>{{ scope.row.keyword===""?"- -":scope.row.keyword }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column 
+        property="dateTime" 
+        label="时间段"
+        show-overflow-tooltip
       ></el-table-column>
       <el-table-column
         label="操作" 
@@ -32,7 +51,7 @@
           ></el-button>
           <el-popconfirm
             title="确认删除吗?"
-            @onConfirm="confirmDel(scope.row)"
+            @onConfirm="confirmDel(scope.row.id)"
           >
             <el-button
               size="small"
@@ -49,6 +68,8 @@
 </template>
 
 <script>
+import API from '../api'
+
 export default {
   name: 'save-condition',
   props: {
@@ -63,23 +84,61 @@ export default {
   },
   data() {
     return {
-      conditionList: [
-        {
-          name: 'name',
-          condition: 'condition'
-        }
-      ]
+      conditionList: [],
+      tableLoading: false,
+      departmentMap: {
+        all: '全部',
+        dev: '研发部',
+        design: '设计部',
+        test: '测试部',
+        person: '人事部'
+      }
+    }
+  },
+  // created() {
+  //   this.getAllCondition();
+  // },
+  watch: {
+    visible() {
+      this.getAllCondition();
     }
   },
   methods: {
+    async getAllCondition() {
+      this.tableLoading = true;
+      try {
+        const result = await API.getsavesearch();
+        const {code, data} = result;
+        if(code !== 200) { return }
+        this.conditionList = data;
+      }catch(err) {
+        console.log(err);
+      }finally {
+        this.tableLoading = false;
+      }
+    },
     searchCondition(row) {
-      console.log(row);
+      this.$emit('reSearch', row);
+      this.oncancel();
     },
     deleteCondition(row) {
       console.log(row);
     },
-    confirmDel(row) {
-      console.log(row);
+    async confirmDel(id) {
+      try {
+        const result = await API.deletesearchbyid(id);
+        const {code} = result;
+        if(code !== 200) { return }
+        this.$notify.success({
+          message: '删除成功',
+          showClose: false,
+          duration: 1000
+        })
+      }catch(err) {
+        console.log(err);
+      }finally {
+        this.getAllCondition();
+      }
     }
   }
 }

@@ -12,6 +12,17 @@
 
 <script>
 export default {
+  props: {
+    datePicker: {
+      type: Array,
+      default: []
+    }
+  },
+  watch: {
+    datePicker() {
+      this.dateTime = this.datePicker;
+    }
+  },
   data() {
     return {
       dateTime: [Date.parse(new Date()), Date.parse(new Date()) + 5 * 1000]

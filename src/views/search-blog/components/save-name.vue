@@ -8,7 +8,9 @@
     <el-input
       v-model.trim="saveName"
       size="small"
-      placeholder="请输入保存条件名称(不超过10个字符)"
+      placeholder="请输入保存条件名称"
+      maxlength="10"
+      show-word-limit
     ></el-input>
     <div slot="footer" class="dialog-footer">
       <el-button 
@@ -25,7 +27,9 @@
 </template>
 
 <script>
+import API from '../api'
 import moment from 'moment';
+import qs from 'qs'
 
 export default {
   data() {
@@ -41,6 +45,10 @@ export default {
     oncancel: {
       type: Function,
       default: () => {}
+    },
+    department: {
+      type: String,
+      default: 'all'
     },
     keyword: {
       type: String,
@@ -60,13 +68,28 @@ export default {
       this.saveName = '';
       this.oncancel();
     },
-    saveSearchName() {
+    async saveSearchName() {
       let params = {
-        name: this.saveName,
+        username: 'admin',
+        saveName: this.saveName,
+        department: this.department,
         keyword: this.keyword,
-        dateTime: [this.startTime, this.endTime]
+        dateTime: JSON.stringify([this.startTime, this.endTime])
       }
-      this.cancelSave();
+      try {
+        let result = await API.addsavesearch(params);
+        const {code} = result;
+        if(code !== 200) { return }
+        this.$notify.success({
+          message: '保存成功',
+          showClose: false,
+          duration: 1000
+        })
+      }catch (err) {
+        console.log(err)
+      }finally {
+        this.cancelSave();
+      }
     }
   }
 }

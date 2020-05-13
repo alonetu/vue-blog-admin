@@ -14,7 +14,7 @@
             @click="showSaveCondition"
           >打开</el-button>
         </div>
-        <date-picker ref="datePicker" />
+        <date-picker ref="datePicker" :datePicker="dateTime"/>
       </div>
       <el-select 
         v-model="activeSelect"
@@ -22,6 +22,7 @@
         filterable 
         class="search-header-select"
         placeholder="请选择"
+        clearable
       >
         <el-option
           v-for="item in department"
@@ -37,6 +38,7 @@
         @keyup.enter.native="searchBlog"
         class="search-header-input"
         placeholder="请输入关键字搜索"
+        clearable
       >
         <i
           class="el-icon-search el-input__icon" 
@@ -48,6 +50,7 @@
       <el-button
         type="primary"
         size="small"
+        @click="searchBlog"
       >查询</el-button>
     </div>
     <div class="search-container">
@@ -63,13 +66,15 @@
     <save-name 
       :visible="showSaveConditionName" 
       :oncancel="hideSaveName"
+      :department="activeSelect"
       :keyword="keyword"
       :startTime="startTime"
       :endTime="endTime"
     />
     <save-condition 
-      :visible="showSaveConditionContent" 
+      :visible="showSaveConditionContent"
       :oncancel="hideSaveCondition"
+      @reSearch="reSearch"
     />
   </div>
 </template>
@@ -94,29 +99,30 @@ export default {
   data() {
     return {
       department: [{
-          value: '0',
+          value: 'all',
           label: '全部'
         },{
-          value: '1',
+          value: 'dev',
           label: '研发部'
         }, {
-          value: '2',
+          value: 'design',
           label: '设计部'
         }, {
-          value: '3',
+          value: 'test',
           label: '测试部'
         }, {
-          value: '4',
+          value: 'person',
           label: '人事部'
         }],
-      activeSelect: '全部',
+      activeSelect: 'all',
       keyword: '',
       blogContent: [],
       showSaveConditionName: false,
       showSaveConditionContent: false,
       startTime: '',
       endTime: '',
-      moreLoading: false
+      moreLoading: false,
+      dateTime: []
     }
   },
   created() {
@@ -142,7 +148,9 @@ export default {
         console.log(err)
       }finally {}
     },
-    searchBlog() {},
+    searchBlog() {
+      this.getArticle();
+    },
     showSaveName() {
       this.showSaveConditionName = true;
       this.startTime = moment(this.$refs.datePicker.dateTime[0]).format("YYYY-MM-DD HH:mm:ss");
@@ -162,6 +170,11 @@ export default {
       setTimeout(() => {
         this.moreLoading = false;
       }, 1000);
+    },
+    reSearch(val) {
+      this.activeSelect = val.department;
+      this.keyword = val.keyword;
+      this.dateTime = JSON.parse(val.dateTime);
     }
   }
 }

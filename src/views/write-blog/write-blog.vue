@@ -17,12 +17,19 @@
         placeholder="请输入博客简介"
         class="blog-head-input"
       ></el-input>
-      <el-button
-        type="primary"
-        class="blog-head-btn"
+      <el-popconfirm
+        title="确认发布吗？"
+        @onConfirm="confirmPublish"
       >
-        发布博客
-      </el-button>
+        <el-button
+          type="primary"
+          class="blog-head-btn"
+          slot="reference"
+          size="small"
+        >
+          发布博客
+        </el-button>
+      </el-popconfirm>
     </div>
     <div class="write-blog-container">
       <editor />
@@ -42,6 +49,14 @@ export default {
     return {
       title: '',
       intro: ''
+    }
+  },
+  methods: {
+    confirmPublish() {
+      this.$notify.success({
+        message: '发布成功',
+        duration: 1000
+      })
     }
   }
 }
