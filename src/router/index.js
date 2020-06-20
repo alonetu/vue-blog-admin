@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 Vue.use(Router);
 
@@ -72,15 +74,15 @@ const router = new Router({
       name: 'article-detail',
       component: ArticleDetail,
       meta: { title: '文章详情页' }
-    },
-    // {
-    //   path: '*',
-    //   redirect: '/login'
-    // }
+    }
   ]
 })
 router.beforeEach((to, from, next) => {
+  NProgress.start();
   next();
+})
+router.afterEach((to, from) => {
+  NProgress.done();
 })
 
 export default router;

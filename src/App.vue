@@ -33,4 +33,9 @@ export default {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/** 修改nprogress颜色 */
+#nprogress .bar {
+  background: #086972 !important; //自定义颜色
+}
 </style>

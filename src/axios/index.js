@@ -1,13 +1,17 @@
-import axios from 'axios'
-import { notification } from 'element-ui'
+import axios from 'axios';
+import { notification } from 'element-ui';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 // 请求拦截器
 axios.interceptors.request.use(config => {
+  NProgress.start();
   return config
 }, () => {})
 
 // 响应拦截器
 axios.interceptors.response.use(res => {
+  NProgress.done();
   return res.data;
 }, err => {
   return notification.error({

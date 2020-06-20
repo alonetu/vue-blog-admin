@@ -75,8 +75,8 @@
               <el-switch
                 style="display: block"
                 v-model="scope.row.access"
-                active-color="#13ce66"
-                inactive-color="#ff4949"
+                active-color="#409eff"
+                inactive-color="#13ce66"
                 active-text="管理员"
                 inactive-text="普通用户"
               >

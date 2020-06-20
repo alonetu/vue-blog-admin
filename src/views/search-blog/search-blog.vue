@@ -22,7 +22,6 @@
         filterable 
         class="search-header-select"
         placeholder="请选择"
-        clearable
       >
         <el-option
           v-for="item in department"
@@ -134,11 +133,6 @@ export default {
         const {code, data} = await API.getArticle();
         if(200 !== code) { return }
         this.blogContent = data;
-        this.$notify.success({
-          message: '博客查询成功',
-          duration: 1200,
-          showClose: false
-        })
       }catch(err) {
         this.$notify.error({
           message: err,
@@ -175,6 +169,9 @@ export default {
       this.activeSelect = val.department;
       this.keyword = val.keyword;
       this.dateTime = JSON.parse(val.dateTime);
+      this.$nextTick(() => {
+        this.getArticle();
+      })
     }
   }
 }
