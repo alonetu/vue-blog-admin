@@ -5,22 +5,12 @@ import 'nprogress/nprogress.css';
 
 Vue.use(Router);
 
-const Login = () => import('@/views/login')
-const MainView = () => import('@/views/main-view')
-const HomePage = () => import('@/views/home-page/home-page')
-const WriteBlog = () => import('@/views/write-blog/write-blog')
-const SearchBlog = () => import('@/views/search-blog/search-blog')
-const ArticleDetail = () => import('@/views/article-detail/article-detail')
-const UserManage = () => import('@/views/user-manage/user-manage')
-const PersonCenter = () => import('@/views/person-center/person-center')
-const AccessConfig = () => import('@/views/access-config/access-config')
-
 const router = new Router({
   mode: 'history',
   routes: [
     {
       path: '/login',
-      component: Login
+      component: () => import('@/views/login')
     },
     {
       path: '/',
@@ -29,42 +19,42 @@ const router = new Router({
     {
       path: '/',
       name: 'main-view',
-      component: MainView,
+      component: () => import('@/views/main-view'),
       children: [
         {
           path: 'home-page',
           name: 'home-page',
-          component: HomePage,
+          component: () => import('@/views/home-page/home-page'),
           meta: { title: '首页' }
         },
         {
           path: 'write-blog',
           name: 'write-blog',
-          component: WriteBlog,
+          component: () => import('@/views/write-blog/write-blog'),
           meta: { title: '写博客' }
         },
         {
           path: 'search-blog',
           name: 'search-blog',
-          component: SearchBlog,
+          component: () => import('@/views/search-blog/search-blog'),
           meta: { title: '查询博客' }
         },
         {
           path: 'user-manage',
           name: 'user-manage',
-          component: UserManage,
+          component: () => import('@/views/user-manage/user-manage'),
           meta: { title: '用户管理' }
         },
         {
           path: 'person-center',
           name: 'person-center',
-          component: PersonCenter,
+          component: () => import('@/views/person-center/person-center'),
           meta: { title: '个人中心' }
         },
         {
           path: 'access-config',
           name: 'access-config',
-          component: AccessConfig,
+          component: () => import('@/views/access-config/access-config'),
           meta: { title: '权限配置' }
         }
       ]
@@ -72,15 +62,19 @@ const router = new Router({
     {
       path: '/article-detail/:id',
       name: 'article-detail',
-      component: ArticleDetail,
+      component: () => import('@/views/article-detail/article-detail'),
       meta: { title: '文章详情页' }
     }
   ]
 })
+
+
 router.beforeEach((to, from, next) => {
   NProgress.start();
   next();
 })
+
+
 router.afterEach((to, from) => {
   NProgress.done();
 })

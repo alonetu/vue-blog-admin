@@ -32,13 +32,16 @@
       </el-popconfirm>
     </div>
     <div class="write-blog-container">
-      <editor />
+      <editor :catchData="catchData"/>
     </div>
   </div>
 </template>
 
 <script>
-import Editor from '@/components/editor'
+import Editor from '@/components/editor';
+import API from './api'
+// 格式化时间组件
+import moment from 'moment';
 
 export default {
   name: 'write-blog',
@@ -48,15 +51,46 @@ export default {
   data() {
     return {
       title: '',
-      intro: ''
+      intro: '',
+      content: ''
     }
   },
   methods: {
-    confirmPublish() {
-      this.$notify.success({
-        message: '发布成功',
-        duration: 1000
-      })
+    async confirmPublish() {
+      const {title, intro, content} = this;
+      if(title === '' || intro === '' || content === '') {
+        this.$notify.warning('请完整填写博客信息');
+        return;
+      }
+      let params = {
+        auth: this.$store.state.user.name,
+        title,
+        intro,
+        content,
+        createTime: this.formatTime(new Date()),
+        updateTime: this.formatTime(new Date()),
+      }
+      try {
+        const result = await API.addBlog(params);
+        const {code} = result;
+        if(code !== 200) {return}
+        this.$notify.success({
+          message: '发布博客成功',
+          duration: 1000
+        })
+      } catch(err) {
+        console.log(err);
+      }
+    },
+    // 获取组件中html内容，博客内容
+    catchData(data) {
+      this.content = data;
+    },
+    /**
+     * 格式化时间
+     */
+    formatTime(time) {
+      return moment(time).format('YYYY-MM-DD HH:mm:ss');
     }
   }
 }
