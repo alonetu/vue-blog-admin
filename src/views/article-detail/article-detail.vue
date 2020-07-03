@@ -4,17 +4,17 @@
       <div class="article-title">{{article.title}}</div>
       <div class="article-intro">简介：{{article.intro}}</div>
       <div class="article-info">
-        <span class="article-info-auth">author: {{article.auth}}</span>
-        <span class="article-info-time">updateTime: {{updateTime}}</span>
+        <span class="article-info-auth">作者: {{article.auth}}</span>
+        <span class="article-info-time">更新时间: {{updateTime}}</span>
       </div>
-      <div class="article-content">{{article.content}}</div>
+      <div class="article-content" v-html="article.content"></div>
     </div>
   </div>
 </template>
 
 <script>
-import API from './api'
-import moment from 'moment'
+import API from "./api";
+import { formatTime } from "@/utils/";
 
 export default {
   name: 'article-detail',
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     updateTime() {
-      return moment(this.article.updateTime).format('YYYY-MM-DD HH:mm:ss');
+      return formatTime(this.article.updateTime);
     }
   }
 }

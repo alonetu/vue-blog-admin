@@ -13,11 +13,11 @@
       </span>
       <span class="blog-item-info-comment">
         <i class="el-icon-chat-dot-square"></i>
-        {{ blogContent.comment }}
+        {{ blogContent.comment ? blogContent.comment : 0 }}
       </span>
       <span class="blog-item-info-collect">
         <i class="el-icon-star-off"></i>
-        {{ blogContent.collect }}
+        {{ blogContent.collect ? blogContent.collect : 0 }}
       </span>
     </div>
     <el-divider></el-divider>

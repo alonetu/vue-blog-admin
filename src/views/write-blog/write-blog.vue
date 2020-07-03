@@ -4,7 +4,7 @@
       <el-input
         v-model="title"
         type="text"
-        maxlength="20"
+        maxlength="50"
         show-word-limit
         placeholder="请输入博客标题"
         class="blog-head-input"
@@ -32,16 +32,15 @@
       </el-popconfirm>
     </div>
     <div class="write-blog-container">
-      <editor :catchData="catchData"/>
+      <editor ref="editor" :catchData="catchData"/>
     </div>
   </div>
 </template>
 
 <script>
-import Editor from '@/components/editor';
-import API from './api'
-// 格式化时间组件
-import moment from 'moment';
+import Editor from "@/components/editor";
+import API from "./api";
+import { formatTime } from "@/utils/";
 
 export default {
   name: 'write-blog',
@@ -67,8 +66,8 @@ export default {
         title,
         intro,
         content,
-        createTime: this.formatTime(new Date()),
-        updateTime: this.formatTime(new Date()),
+        createTime: formatTime(new Date()),
+        updateTime: formatTime(new Date()),
       }
       try {
         const result = await API.addBlog(params);
@@ -78,6 +77,10 @@ export default {
           message: '发布博客成功',
           duration: 1000
         })
+        // this.title = '';
+        // this.intro =  '';
+        // this.content = '';
+        // this.$refs.editor.clearContent();
       } catch(err) {
         console.log(err);
       }
@@ -85,12 +88,6 @@ export default {
     // 获取组件中html内容，博客内容
     catchData(data) {
       this.content = data;
-    },
-    /**
-     * 格式化时间
-     */
-    formatTime(time) {
-      return moment(time).format('YYYY-MM-DD HH:mm:ss');
     }
   }
 }

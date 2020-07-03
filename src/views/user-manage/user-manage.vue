@@ -152,21 +152,32 @@
         @getUserList="getUserList"
       />
     </el-dialog>
+    <!-- <UserForm 
+      :editTitle="editTitle"
+      :editVisible="editVisible"
+      :editData="editData"
+      :editType="editType"
+      :oncancel="closeUserForm"
+      @getUserList="getUserList"
+    /> -->
   </div>
 </template>
 
 <script>
 import API from "./api";
-import qs from "qs"
+import qs from "qs";
+import { formatTime } from "@/utils/";
 
 import UserDetail from "./components/user-detail";
 import UserEdit from "./components/user-edit";
+import UserForm from "./components/user-form";
 
 export default {
   name: "user-manage",
   components: {
     UserDetail,
-    UserEdit
+    UserEdit,
+    UserForm
   },
   data() {
     return {
@@ -182,7 +193,13 @@ export default {
       editVisible: false,
       editTitle: "新增用户",
       editType: 1, // 1,表示编辑，2,表示新增
-      editData: {}
+      editData: {
+        cname: '',
+        department: '',
+        name: '',
+        password: '',
+        role: ''
+      }
     };
   },
   /**
@@ -215,6 +232,11 @@ export default {
         const { code, data, pageTotal } = result; 
         if (code === 200) {
           this.tableData = data;
+          // 处理时间格式
+          this.tableData.map(item => {
+            item.createTime = formatTime(item.createTime);
+            item.updateTime = formatTime(item.updateTime);
+          })
           this.pageTotal = pageTotal;
         }
       } catch (err) {
@@ -353,6 +375,9 @@ export default {
     getUserList() {
       this.editVisible = false;
       this.getUserInfo();
+    },
+    closeUserForm() {
+      this.editVisible = false;
     }
   }
 };
