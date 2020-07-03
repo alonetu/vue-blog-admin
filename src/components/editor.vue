@@ -51,6 +51,12 @@ export default {
       "redo" // 重复
     ];
     this.editor.create(); // 创建富文本实例
+  },
+  methods: {
+    // 清空内容区
+    clearContent() {
+      this.editorContent = "";
+    }
   }
 }
 </script>
