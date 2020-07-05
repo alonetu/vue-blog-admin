@@ -32,4 +32,9 @@ function formatTime(time) {
   return moment(time).format('YYYY-MM-DD HH:mm:ss');
 }
 
-export { getGuid, getAllOpenPage, formatTime }
+// 重置表格方法
+function resetForm(formName) {
+  this.$refs[formName].resetFields();
+}
+
+export { getGuid, getAllOpenPage, formatTime, resetForm }
