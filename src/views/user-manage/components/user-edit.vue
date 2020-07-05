@@ -78,8 +78,7 @@
 
 <script>
 import API from "../api";
-// 格式化时间组件
-import moment from 'moment';
+import { formatTime, resetForm } from "@/utils/";
 
 export default {
   name: "user-edit",
@@ -88,65 +87,26 @@ export default {
       type: Object,
       default: () => {}
     },
-    editType: {
-      type: Number,
-      default: null
+    getUserList: {
+      type: Function,
+      default: () => {}
     }
   },
   methods: {
-    /**
-     * 提交验证表单
-     */
+    // 提交验证表单
     submitForm(formName, data) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          if (2 === this.editType) {
-            this.addUser(data);
-          } else if (1 === this.editType) {
-            this.updateUser(data);
-          }
+          this.addOrUpdateUser(data);
         } else {
           return false;
         }
-        this.getUsers();
+        // 获取用户列表
+        this.getUserList();
       });
     },
     /**
-     * 添加用户
-     * @param {string} cname 用户中文名称
-     * @param {string} name 用户账号
-     * @param {string} password 用户密码
-     * @param {string} department 用户所在部门
-     * @param {string} role 用户角色
-     * @param {string} createTime 创建时间
-     * @param {string} updateTime 更新时间
-     */
-    async addUser(data) {
-      let params = {
-        cname: data.cname,
-        name: data.name,
-        password: data.password,
-        department: data.department,
-        role: data.role,
-        createTime: this.formatTime(new Date()),
-        updateTime: ''
-      }
-      try {
-        let result = await API.addUser(params);
-        let { code } = result;
-        if (200 === code) {
-          this.$notify.success({
-            message: "添加用户成功",
-            showClose: false,
-            duration: 800
-          });
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    /**
-     * 更新用户
+     * 添加或修改用户
      * @param {number} id 用户id
      * @param {string} cname 用户中文名称
      * @param {string} name 用户账号
@@ -156,23 +116,25 @@ export default {
      * @param {string} createTime 创建时间
      * @param {string} updateTime 更新时间
      */
-    async updateUser(data) {
-      let params = {
-        id: data.id,
-        cname: data.cname,
-        name: data.name,
-        password: data.password,
-        department: data.department,
-        role: data.role,
-        createTime: data.createTime,
-        updateTime: this.formatTime(new Date())
-      }
+    async addOrUpdateUser(data) {
+      let params = data;
       try {
-        let result = await API.updateUser(params);
+        let result = {};
+        let resMessage = '';
+        // id不存在时即为添加，存在则是修改
+        if(undefined == data.id) {
+          params.createTime = params.updateTime = formatTime(new Date());
+          result = await API.addUser(params);
+          resMessage = "添加";
+        }else {
+          params.updateTime = formatTime(new Date());
+          result = await API.updateUser(params);
+          resMessage = "修改";
+        }
         let { code } = result;
         if (200 === code) {
           this.$notify.success({
-            message: "修改用户成功",
+            message: `${resMessage}用户成功`,
             showClose: false,
             duration: 800
           });
@@ -180,25 +142,6 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    },
-    /**
-     * 重置表格方法
-     */
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
-    /**
-     * 父子组件传值
-     * 向父组件发送事件，获取用户列表
-     */
-    getUsers() {
-      this.$emit("getUserList");
-    },
-    /**
-     * 格式化时间
-     */
-    formatTime(time) {
-      return moment(time).format('YYYY-MM-DD HH:mm:ss');
     }
   }
 };

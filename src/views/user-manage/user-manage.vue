@@ -29,11 +29,6 @@
           style="width: 100%"
           @sort-change="changeTableSort"
         >
-          <!-- <el-table-column type="expand">
-            <template slot-scope="scope">
-              <user-detail :userDetail="scope.row" />
-            </template>
-          </el-table-column> -->
           <el-table-column 
             prop="cname" 
             label="姓名"
@@ -148,17 +143,15 @@
     >
       <user-edit 
         :editData="editData" 
-        :editType="editType" 
-        @getUserList="getUserList"
+        :getUserList="getUserList"
       />
     </el-dialog>
     <!-- <UserForm 
       :editTitle="editTitle"
       :editVisible="editVisible"
       :editData="editData"
-      :editType="editType"
       :oncancel="closeUserForm"
-      @getUserList="getUserList"
+      :getUserList="getUserList"
     /> -->
   </div>
 </template>
@@ -168,14 +161,12 @@ import API from "./api";
 import qs from "qs";
 import { formatTime } from "@/utils/";
 
-import UserDetail from "./components/user-detail";
 import UserEdit from "./components/user-edit";
 import UserForm from "./components/user-form";
 
 export default {
   name: "user-manage",
   components: {
-    UserDetail,
     UserEdit,
     UserForm
   },
@@ -192,7 +183,6 @@ export default {
       detailVisible: false,
       editVisible: false,
       editTitle: "新增用户",
-      editType: 1, // 1,表示编辑，2,表示新增
       editData: {
         cname: '',
         department: '',
@@ -292,7 +282,6 @@ export default {
       this.editTitle = "编辑用户";
       this.editVisible = true;
       this.editData = data;
-      this.editType = 1;
     },
     /**
      * 点击新增
@@ -301,7 +290,6 @@ export default {
       this.editTitle = "新增用户";
       this.editVisible = true;
       this.editData = {};
-      this.editType = 2;
     },
     /**
      * 删除当前行
