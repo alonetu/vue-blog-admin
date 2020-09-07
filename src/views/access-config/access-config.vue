@@ -164,7 +164,7 @@ export default {
     padding: 16px;
     box-sizing: border-box;
     width: 240px;
-    min-height: calc(100vh - 224px);
+    min-height: calc(100vh - 208px);
     background-color: #fff;
     border-radius: 4px;
   }
@@ -173,7 +173,7 @@ export default {
     box-sizing: border-box;
     margin-left: 256px;
     width: calc(100% - 256px);
-    height: calc(100vh - 225px);
+    height: calc(100vh - 209px);
     background-color: #fff;
     border-radius: 4px;
     overflow-y: auto;

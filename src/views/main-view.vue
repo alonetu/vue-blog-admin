@@ -65,8 +65,8 @@ export default {
       height: 80px;
     }
     .container-router {
-      padding: 24px;
-      height: calc(100% - 128px);
+      padding: 16px;
+      height: calc(100% - 112px);
       overflow: hidden;
     }
   }
