@@ -79,13 +79,13 @@
 </template>
 
 <script>
-import DatePicker from '@/components/date-picker'
-import BlogItem from './components/blog-item'
-import SaveName from './components/save-name'
-import SaveCondition from './components/save-condition'
-import {blogContent} from './data'
-import API from './api'
-import moment from 'moment'
+import DatePicker from "@/components/date-picker";
+import BlogItem from "./components/blog-item";
+import SaveName from "./components/save-name";
+import SaveCondition from "./components/save-condition";
+
+import API from "./api";
+import { formatTime } from '@/utils/';
 
 export default {
   name: 'search-blog',
@@ -128,6 +128,7 @@ export default {
     this.getArticle();
   },
   methods: {
+    // 获取所有博客信息
     async getArticle() {
       try {
         const {code, data} = await API.getArticle();
@@ -139,32 +140,41 @@ export default {
           duration: 1200,
           showClose: false
         })
-        console.log(err)
       }finally {}
     },
+    // 搜索博客
     searchBlog() {
       this.getArticle();
     },
+    // 打开保存名称
     showSaveName() {
       this.showSaveConditionName = true;
-      this.startTime = moment(this.$refs.datePicker.dateTime[0]).format("YYYY-MM-DD HH:mm:ss");
-      this.endTime = moment(this.$refs.datePicker.dateTime[1]).format("YYYY-MM-DD HH:mm:ss");
+      this.startTime = formatTime(this.$refs.datePicker.dateTime[0]);
+      this.endTime = formatTime(this.$refs.datePicker.dateTime[1]);
     },
+    // 隐藏保存名称
     hideSaveName() {
       this.showSaveConditionName = false;
     },
+    // 打开保存条件
     showSaveCondition() {
       this.showSaveConditionContent = true;
     },
+    // 隐藏保存条件
     hideSaveCondition() {
       this.showSaveConditionContent = false;
     },
+    // 加载更多
     loadMore() {
       this.moreLoading = true;
       setTimeout(() => {
         this.moreLoading = false;
       }, 1000);
     },
+    /**
+     * 点击保存条件后进行搜索
+     * @param {object} val 当前点击条件
+     */
     reSearch(val) {
       this.activeSelect = val.department;
       this.keyword = val.keyword;

@@ -15,11 +15,7 @@
           { min: 2, max: 10, message: '姓名长度2-10位', trigger: 'blur' }
         ]"
       >
-        <el-input 
-          type="text" 
-          v-model="editData.cname" 
-          autocomplete="off"
-        ></el-input>
+        <el-input type="text" v-model="editData.cname" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item
         label="账号"
@@ -29,11 +25,7 @@
           { min: 3, max: 15, message: '账号长度3-10位', trigger: 'blur' }
         ]"
       >
-        <el-input 
-          type="text" 
-          v-model="editData.name" 
-          autocomplete="off"
-        ></el-input>
+        <el-input type="text" v-model="editData.name" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item
         label="密码"
@@ -43,11 +35,7 @@
           { min: 3, message: '密码长度最低3位', trigger: 'blur' }
         ]"
       >
-        <el-input 
-          type="password" 
-          v-model="editData.password" 
-          autocomplete="off"
-        ></el-input>
+        <el-input type="password" v-model="editData.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item
         label="部门"
@@ -56,7 +44,7 @@
           { required: true, message: '部门必填项', trigger: 'blur' },
           { min: 2, message: '部门名称最低2位', trigger: 'blur' }
         ]"
-      > 
+      >
         <el-input v-model.number="editData.department"></el-input>
       </el-form-item>
       <el-form-item
@@ -85,17 +73,17 @@ export default {
   props: {
     editData: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     getUserList: {
       type: Function,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   methods: {
     // 提交验证表单
     submitForm(formName, data) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
           this.addOrUpdateUser(data);
         } else {
@@ -120,13 +108,13 @@ export default {
       let params = data;
       try {
         let result = {};
-        let resMessage = '';
+        let resMessage = "";
         // id不存在时即为添加，存在则是修改
-        if(undefined == data.id) {
+        if (undefined == data.id) {
           params.createTime = params.updateTime = formatTime(new Date());
           result = await API.addUser(params);
           resMessage = "添加";
-        }else {
+        } else {
           params.updateTime = formatTime(new Date());
           result = await API.updateUser(params);
           resMessage = "修改";
@@ -136,7 +124,7 @@ export default {
           this.$notify.success({
             message: `${resMessage}用户成功`,
             showClose: false,
-            duration: 800
+            duration: 800,
           });
         }
       } catch (err) {

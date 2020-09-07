@@ -1,16 +1,6 @@
 <template>
-  <el-dialog 
-    :title="editTitle" 
-    :visible="editVisible"
-    @close="handleClose"
-    width="30%"
-  >
-    <el-form
-      :model="formData"
-      status-icon
-      ref="formData"
-      label-width="60px"
-    >
+  <el-dialog :title="editTitle" :visible="editVisible" @close="handleClose" width="30%">
+    <el-form :model="formData" status-icon ref="formData" label-width="60px">
       <el-form-item
         label="姓名"
         prop="cname"
@@ -19,11 +9,7 @@
           { min: 2, max: 10, message: '姓名长度2-10位', trigger: 'blur' }
         ]"
       >
-        <el-input 
-          type="text" 
-          v-model="formData.cname" 
-          autocomplete="off"
-        ></el-input>
+        <el-input type="text" v-model="formData.cname" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item
         label="账号"
@@ -33,11 +19,7 @@
           { min: 3, max: 15, message: '账号长度3-10位', trigger: 'blur' }
         ]"
       >
-        <el-input 
-          type="text" 
-          v-model="formData.name" 
-          autocomplete="off"
-        ></el-input>
+        <el-input type="text" v-model="formData.name" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item
         label="密码"
@@ -47,11 +29,7 @@
           { min: 3, message: '密码长度最低3位', trigger: 'blur' }
         ]"
       >
-        <el-input 
-          type="password" 
-          v-model="formData.password" 
-          autocomplete="off"
-        ></el-input>
+        <el-input type="password" v-model="formData.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item
         label="部门"
@@ -60,7 +38,7 @@
           { required: true, message: '部门必填项', trigger: 'blur' },
           { min: 2, message: '部门名称最低2位', trigger: 'blur' }
         ]"
-      > 
+      >
         <el-input v-model.number="formData.department"></el-input>
       </el-form-item>
       <el-form-item
@@ -73,15 +51,8 @@
         <el-input v-model.number="formData.role"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button 
-          type="primary" 
-          size="small"
-          @click="submitForm('formData', formData)"
-        >提交</el-button>
-        <el-button
-          size="small"
-          @click="resetForm('formData')"
-        >重置</el-button>
+        <el-button type="primary" size="small" @click="submitForm('formData', formData)">提交</el-button>
+        <el-button size="small" @click="resetForm('formData')">重置</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -95,50 +66,50 @@ export default {
   name: "user-edit",
   props: {
     editTitle: {
-      type: String
+      type: String,
     },
     editData: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     editType: {
       type: Number,
-      default: null
+      default: null,
     },
     editVisible: {
       type: Boolean,
-      default: false
+      default: false,
     },
     oncancel: {
       type: Function,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   watch: {
     editData: {
       handler(val) {
-        this.formData = val;
+        this.formData = JSON.parse(JSON.stringify(val)); // 使用深拷贝, 以免影响父组件中的数据
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   data() {
     return {
       formData: {
-        cname: '',
-        department: '',
-        name: '',
-        password: '',
-        role: ''
-      }
-    }
+        cname: "",
+        department: "",
+        name: "",
+        password: "",
+        role: "",
+      },
+    };
   },
   methods: {
     /**
      * 提交验证表单
      */
     submitForm(formName, data) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
           this.handleUserInfo();
           // if (2 === this.editType) {
@@ -165,8 +136,8 @@ export default {
      */
     async handleUserInfo() {
       let params = this.formData;
-      if(params.id == null) {
-        console.log('xinzeng')
+      if (params.id == null) {
+        console.log("xinzeng");
       }
       console.log(params);
     },
@@ -178,8 +149,8 @@ export default {
         department: data.department,
         role: data.role,
         createTime: formatTime(new Date()),
-        updateTime: ''
-      }
+        updateTime: "",
+      };
       try {
         let result = await API.addUser(params);
         let { code } = result;
@@ -187,7 +158,7 @@ export default {
           this.$notify.success({
             message: "添加用户成功",
             showClose: false,
-            duration: 800
+            duration: 800,
           });
         }
       } catch (err) {
@@ -214,8 +185,8 @@ export default {
         department: data.department,
         role: data.role,
         createTime: data.createTime,
-        updateTime: formatTime(new Date())
-      }
+        updateTime: formatTime(new Date()),
+      };
       try {
         let result = await API.updateUser(params);
         let { code } = result;
@@ -223,7 +194,7 @@ export default {
           this.$notify.success({
             message: "修改用户成功",
             showClose: false,
-            duration: 800
+            duration: 800,
           });
         }
       } catch (err) {
@@ -244,10 +215,10 @@ export default {
       this.$emit("getUserList");
     },
     handleClose() {
-      this.resetForm('formData');
+      this.resetForm("formData");
       this.oncancel();
-    }
-  }
+    },
+  },
 };
 </script>
 

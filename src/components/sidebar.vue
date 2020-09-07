@@ -86,7 +86,7 @@ export default {
         },
         {
           icon: 'el-icon-edit-outline',
-          label: '写博客',
+          label: '书写博客',
           path: '/write-blog'
         },
         {
