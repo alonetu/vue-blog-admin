@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css';
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'history', // 路由history模式
+  // mode: 'history', // 路由history模式
   routes: [
     {
       path: '/login',

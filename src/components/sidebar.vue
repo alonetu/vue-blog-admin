@@ -67,13 +67,13 @@ export default {
       deep: true
     },
     $route() {
-      this.defaultPage = window.location.pathname;
+      this.defaultPage = window.location.hash.replace('#', '');
     }
   },
   mounted() {
     // 如果sessionStorage中保存了所有打开的页面，则从sessionStage中取值
     this.allOpenPage = getAllOpenPage();
-    this.defaultPage = window.location.pathname;
+    this.defaultPage = window.location.hash.replace('#', '');
   },
   data() {
     return {

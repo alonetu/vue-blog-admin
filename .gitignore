@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
+
 /dist
-vue-blog-admin
+/vue-blog-admin
 
 # local env files
 .env.local

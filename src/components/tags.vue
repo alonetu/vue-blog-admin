@@ -35,7 +35,7 @@ export default {
     }
   },
   mounted() {
-    this.path = window.location.pathname;
+    this.path = window.location.hash.replace('#', '');
     // 如果sessionStorage中保存了所有打开的页面，则从sessionStage中取值
     this.tags = getAllOpenPage();
   },
@@ -48,7 +48,7 @@ export default {
      * 记录当前路由赋给当前tag
      */
     $route() {
-      this.path = window.location.pathname;
+      this.path = window.location.hash.replace('#', '');
     },
     /**
      * 监听vuex中保存所有打开页面
@@ -76,7 +76,7 @@ export default {
       this.path = preTag.path;
       this.$store.commit('allOpenPage', this.tags);
       // 如果关闭标签的前一个标签是当前页面则不做跳转
-      if(this.path === window.location.pathname) { return }
+      if(this.path === window.location.hash.replace('#', '')) { return }
       this.$router.push(this.path);
     }
   }
