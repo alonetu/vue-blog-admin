@@ -7,6 +7,7 @@ module.exports = {
   runtimeCompiler: true,
   transpileDependencies: ["element-ui/packages", "element-ui/src"],
   configureWebpack: {
+    devtool: 'source-map', //默认是：cheap-module-eval-source-map
     plugins: [
       new CopyWebpackPlugin([
         {
@@ -17,6 +18,7 @@ module.exports = {
       ])
     ]
   },
+  lintOnSave: false,
   devServer: {
     proxy: {
       '/blog': {

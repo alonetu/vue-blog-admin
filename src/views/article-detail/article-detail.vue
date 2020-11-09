@@ -1,11 +1,11 @@
 <template>
   <div class="article-detail">
     <div class="article-detail-container">
-      <div class="article-title">{{article.title}}</div>
-      <div class="article-intro">简介：{{article.intro}}</div>
+      <div class="article-title">{{ article.title }}</div>
+      <div class="article-intro">简介：{{ article.intro }}</div>
       <div class="article-info">
-        <span class="article-info-auth">作者: {{article.auth}}</span>
-        <span class="article-info-time">更新时间: {{updateTime}}</span>
+        <span class="article-info-auth">作者: {{ article.auth }}</span>
+        <span class="article-info-time">更新时间: {{ updateTime }}</span>
       </div>
       <div class="article-content" v-html="article.content"></div>
     </div>
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import API from "./api";
-import { formatTime } from "@/utils/";
+import API from './api'
+import { formatTime } from '@/utils/'
 
 export default {
   name: 'article-detail',
-  created() {
-    this.getArticleDetail(this.$route.params.id);
+  mounted() {
+    this.getArticleDetail(this.$route.params.id)
   },
   data() {
     return {
@@ -28,15 +28,15 @@ export default {
   },
   methods: {
     async getArticleDetail(id) {
-      const result = await API.getArticleDetail(id);
-      const {code, data} = result;
-      if(code !== 0) { return }
-      this.article = data[0];
+      const result = await API.getArticleDetail(id)
+      const { code, data } = result
+      if (code !== 0) { return }
+      this.article = data[0]
     }
   },
   computed: {
     updateTime() {
-      return formatTime(this.article.updateTime);
+      return formatTime(this.article.updateTime)
     }
   }
 }

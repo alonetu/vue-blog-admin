@@ -36,12 +36,12 @@ export default {
   methods: {
     /** 新窗口打开文章详情页 */
     inBlogDetail(id) {
-      const params = { id: id };
+      const params = { id };
       let routeData = this.$router.resolve({
-        path: `/article-detail/${id}`,
+        hash: `/article-detail/${id}`,
         query: params
       });
-      window.open(routeData.location.path, "_blank");
+      window.open(routeData.location.hash, "_blank");
     }
   }
 }
