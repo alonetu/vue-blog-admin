@@ -79,7 +79,7 @@ export default {
       try {
         let result = await API.addsavesearch(params);
         const {code} = result;
-        if(code !== 200) { return }
+        if(code !== 0) { return }
         this.$notify.success({
           message: '保存成功',
           showClose: false,

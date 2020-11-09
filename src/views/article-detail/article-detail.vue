@@ -30,7 +30,7 @@ export default {
     async getArticleDetail(id) {
       const result = await API.getArticleDetail(id);
       const {code, data} = result;
-      if(code !== 200) { return }
+      if(code !== 0) { return }
       this.article = data[0];
     }
   },

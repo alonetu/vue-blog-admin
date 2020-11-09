@@ -120,7 +120,7 @@ export default {
           resMessage = "修改";
         }
         let { code } = result;
-        if (200 === code) {
+        if (0 === code) {
           this.$notify.success({
             message: `${resMessage}用户成功`,
             showClose: false,

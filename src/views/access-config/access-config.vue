@@ -129,7 +129,7 @@ export default {
       try {
         const result = await API.getUserList(qs.stringify(params));
         const {code, data} = result;
-        if(200 !== code) { return }
+        if(0 !== code) { return }
         const developer = data.filter(item => item.department === "研发部");
       }catch(err) {
         console.log(err);

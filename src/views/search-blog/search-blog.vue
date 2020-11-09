@@ -132,7 +132,7 @@ export default {
     async getArticle() {
       try {
         const {code, data} = await API.getArticle();
-        if(200 !== code) { return }
+        if(0 !== code) { return }
         this.blogContent = data;
       }catch(err) {
         this.$notify.error({

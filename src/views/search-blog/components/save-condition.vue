@@ -109,7 +109,7 @@ export default {
       try {
         const result = await API.getsavesearch();
         const {code, data} = result;
-        if(code !== 200) { return }
+        if(code !== 0) { return }
         this.conditionList = data;
       }catch(err) {
         console.log(err);
@@ -128,7 +128,7 @@ export default {
       try {
         const result = await API.deletesearchbyid(id);
         const {code} = result;
-        if(code !== 200) { return }
+        if(code !== 0) { return }
         this.$notify.success({
           message: '删除成功',
           showClose: false,

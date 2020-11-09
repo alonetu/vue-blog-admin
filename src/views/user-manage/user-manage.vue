@@ -220,7 +220,7 @@ export default {
         const result = await API.getUserList(qs.stringify(params));
         // ES6解构赋值
         const { code, data, pageTotal } = result; 
-        if (code === 200) {
+        if (code === 0) {
           this.tableData = data;
           // 处理时间格式
           this.tableData.map(item => {
@@ -316,7 +316,7 @@ export default {
         let params = { id };
         const result = await API.deleteUserById(params);
         const { code } = result;
-        if (200 === code) {
+        if (0 === code) {
           this.resetCurrentPage();
           this.$notify.success({
             message: "删除当前行成功！",

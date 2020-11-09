@@ -71,7 +71,7 @@ export default {
               .then(res => {
                 const {code, data} = res;
                 const user = data[0];
-                if(code !== 200 || user.password !== this.loginForm.password) {
+                if(code !== 0 || user.password !== this.loginForm.password) {
                   return Notification.error({
                     message: '用户名或密码错误',
                     showClose: false,

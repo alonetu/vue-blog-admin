@@ -72,7 +72,7 @@ export default {
       try {
         const result = await API.addBlog(params);
         const {code} = result;
-        if(code !== 200) {return}
+        if(code !== 0) {return}
         this.$notify.success({
           message: '发布博客成功',
           duration: 1000

@@ -154,7 +154,7 @@ export default {
       try {
         let result = await API.addUser(params);
         let { code } = result;
-        if (200 === code) {
+        if (0 === code) {
           this.$notify.success({
             message: "添加用户成功",
             showClose: false,
@@ -190,7 +190,7 @@ export default {
       try {
         let result = await API.updateUser(params);
         let { code } = result;
-        if (200 === code) {
+        if (0 === code) {
           this.$notify.success({
             message: "修改用户成功",
             showClose: false,
