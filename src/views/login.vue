@@ -85,7 +85,13 @@ export default {
                  * 将vuex中的信息写入session
                  * 跳转到home-page页面
                  */
-                const userInfo = {name: user.cname, id: user.name};
+                const userInfo = {
+                    name: user.cname, 
+                    id: user.name, 
+                    role: user.role,
+                    department: user.department,
+                    cname: user.cname
+                  }
                 const defaultPage = "/home-page";
                 this.$store.commit('login', userInfo);
                 this.$router.push({ path: defaultPage });
